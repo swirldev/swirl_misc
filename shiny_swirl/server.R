@@ -3,19 +3,15 @@ library(shiny)
 shinyServer(function(input, output) {
 	
   # Output current unit class selected for testing purposes
-  output$unitText <- renderText({
+  output$unitClass <- renderText({
     paste("Unit class selected:", input$class)
-  })
-  
-  # Output current question type selected for testing purposes
-  output$questionText <- renderText({
-    paste("Question type selected:", input$question_type)
   })
   
   # When submit button is pressed, it's value increments to 1
   observe({
-    if(input$finalSubmit == 0)
+    if(input$finalSubmit == 0) {
       return()
+    }
     
     # Set up return values
     return_vals <- list(Class = input$class,
@@ -29,6 +25,6 @@ shinyServer(function(input, output) {
                         VideoLink = input$video_link)
     
     # Return only non-empty values
-    stopApp(return_vals)
+    stopApp(return_vals[return_vals != ""])
   })
 })
