@@ -9,13 +9,12 @@ shinyUI(pageWithSidebar(
   sidebarPanel(
     # Select unit class
     selectInput("class", "Unit class:",
-                choices = c("Text", 
-                            "Question - R Command",
-                            "Question - Multiple Choice",
-                            "Question - Numeric",
-                            "Question - Text",
-                            "Video", 
-                            "Figure")
+                choices = c("Text" = "text", 
+                            "Question - R Command" = "cmd_question",
+                            "Question - Multiple Choice" = "mult_question",
+                            "Question - Exact Numerical" = "exact_question",
+                            "Video" = "video", 
+                            "Figure" = "figure")
                 )
     ),
   
@@ -27,77 +26,66 @@ shinyUI(pageWithSidebar(
     
     # Text form
     conditionalPanel(
-      condition = "input.class == 'Text'",
-      tags$textarea(id="output", rows=3, cols=40, 
-                    placeholder="Enter main text here...")
+      condition = "input.class == 'text'",
+      tags$textarea(id="text_output", rows=3, cols=40, 
+                    placeholder="Text")
       ),
     
     # Command question form
   	conditionalPanel(
-    	condition = "input.class == 'Question - R Command'",
-    	tags$textarea(id="output", rows=3, cols=40, 
-    	              placeholder="Enter main text here..."),
-    	tags$textarea(id="correct_answer", rows=3, cols=40,
-                    placeholder="Enter correct answer here..."),
-    	tags$textarea(id="answer_tests", rows=3, cols=40, 
-                    placeholder="Enter answer tests here..."),
-    	tags$textarea(id="hint", rows=3, cols=40, 
-    	              placeholder="Enter hint here...")
+    	condition = "input.class == 'cmd_question'",
+    	tags$textarea(id="cmd_output", rows=3, cols=40, 
+    	              placeholder="Question"),
+    	tags$textarea(id="cmd_correct_answer", rows=3, cols=40,
+                    placeholder="Correct answer"),
+    	tags$textarea(id="cmd_answer_tests", rows=3, cols=40, 
+                    placeholder="Answer tests (separated by semi-colons)"),
+    	tags$textarea(id="cmd_hint", rows=3, cols=40, 
+    	              placeholder="Hint")
       ),
     
 		# Multiple choice question form
 		conditionalPanel(
-		  condition = "input.class == 'Question - Multiple Choice'",
-		  tags$textarea(id="output", rows=3, cols=40, 
-		                placeholder="Enter main text here..."),
-		  tags$textarea(id="answer_choices", rows=3, cols=40,
-		                placeholder="Enter answer choices here..."),
-		  tags$textarea(id="correct_answer", rows=3, cols=40,
-		                placeholder="Enter correct answer here..."),
-		  tags$textarea(id="hint", rows=3, cols=40, 
-		                placeholder="Enter hint here...")
+		  condition = "input.class == 'mult_question'",
+		  tags$textarea(id="mult_output", rows=3, cols=40, 
+		                placeholder="Question"),
+		  tags$textarea(id="mult_answer_choices", rows=3, cols=40,
+		                placeholder="Correct answer"),
+		  tags$textarea(id="mult_correct_answer", rows=3, cols=40,
+		                placeholder="Answer tests (separated by semi-colons)"),
+		  tags$textarea(id="mult_hint", rows=3, cols=40, 
+		                placeholder="Hint")
       ),
     
 		# Numeric question
 		conditionalPanel(
-		  condition = "input.class == 'Question - Numeric'",
-		  tags$textarea(id="output", rows=3, cols=40, 
-		                placeholder="Enter main text here..."),
-		  tags$textarea(id="correct_answer", rows=3, cols=40,
-		                placeholder="Enter correct answer here..."),
-		  tags$textarea(id="hint", rows=3, cols=40, 
-		                placeholder="Enter hint here...")
-      ),
-    
-    # Text question
-		conditionalPanel(
-		  condition = "input.class == 'Question - Text'",
-		  tags$textarea(id="output", rows=3, cols=40, 
-		                placeholder="Enter main text here..."),
-		  tags$textarea(id="correct_answer", rows=3, cols=40,
-		                placeholder="Enter correct answer here..."),
-		  tags$textarea(id="hint", rows=3, cols=40, 
-		                placeholder="Enter hint here...")
+		  condition = "input.class == 'exact_question'",
+		  tags$textarea(id="num_output", rows=3, cols=40, 
+		                placeholder="Question"),
+		  tags$textarea(id="num_correct_answer", rows=3, cols=40,
+		                placeholder="Correct answer"),
+		  tags$textarea(id="num_hint", rows=3, cols=40, 
+		                placeholder="Hint")
       ),
     
     # Video form
 		conditionalPanel(
-		  condition = "input.class == 'Video'",
-		  tags$textarea(id="output", rows=3, cols=40, 
-		                placeholder="Enter main text here..."),
+		  condition = "input.class == 'video'",
+		  tags$textarea(id="video_output", rows=3, cols=40, 
+		                placeholder="Would you like to watch a video on..."),
 		  tags$textarea(id="video_link", rows=3, cols=40, 
-		                placeholder="Enter video URL here...")
+		                placeholder="Video URL")
       ),
     
     # Figure form
 		conditionalPanel(
-		  condition = "input.class == 'Figure'",
-		  tags$textarea(id="output", rows=3, cols=40, 
-		                placeholder="Enter main text here..."),
+		  condition = "input.class == 'figure'",
+		  tags$textarea(id="fig_output", rows=3, cols=40, 
+		                placeholder="Text"),
 		  tags$textarea(id="figure", rows=3, cols=40, 
-		                placeholder="Enter figure filename here..."),
+		                placeholder="Figure file name (.R extension)"),
 		  tags$textarea(id="figure_type", rows=3, cols=40, 
-		                placeholder="Enter figure type here...")
+		                placeholder="new or add?")
       ),
     
     # Action button for when form is complete
