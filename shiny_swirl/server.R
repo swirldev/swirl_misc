@@ -3,9 +3,9 @@ library(shiny)
 shinyServer(function(input, output) {
 	
   # Output current unit class selected for testing purposes
-  output$unitClass <- renderText({
-    paste("Unit class selected:", input$class)
-  })
+#   output$unitClass <- renderText({
+#     paste("Unit class selected:", input$class)
+#   })
   
   # When submit button is pressed, it's value increments to 1
   observe({

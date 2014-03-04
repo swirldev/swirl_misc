@@ -7,8 +7,16 @@ shinyUI(pageWithSidebar(
   
   # Select unit class
   sidebarPanel(
+    
+    helpText("Every time you select a content type, fill in the corresponding 
+             form, and press the 'Add it!' button below, new content will
+             be appended to your lesson. When you're done adding new content,
+             press the <esc> key to exit."),
+    
+    br(),
+    
     # Select unit class
-    selectInput("class", "Unit class:",
+    selectInput("class", "What type of content would you like to add?",
                 choices = c("Text" = "text", 
                             "Question - R Command" = "cmd_question",
                             "Question - Multiple Choice" = "mult_question",
@@ -22,7 +30,7 @@ shinyUI(pageWithSidebar(
   mainPanel(
     
     # Output current unit class selected for testing purposes
-		verbatimTextOutput("unitClass"),
+# 		verbatimTextOutput("unitClass"),
     
     # Text form
     conditionalPanel(
@@ -89,6 +97,6 @@ shinyUI(pageWithSidebar(
       ),
     
     # Action button for when form is complete
-    actionButton("finalSubmit", "I'm done!")
+    actionButton("finalSubmit", "Add it!")
     )
 ))
