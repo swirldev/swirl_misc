@@ -1,12 +1,15 @@
 library(shiny)
 
 shinyUI(pageWithSidebar(
-  
+    
   # Lesson name will go here
   headerPanel("swirl content authoring tool"),
   
   # Select unit class
   sidebarPanel(
+    
+#     tags$style(type="text/css", ".well { background-color: #466BB0; }",
+#                "ol { color: white; }", ".control-label { color: white; }"),
     
     helpText(tags$ol(tags$li("Select a content type."),
                      tags$li("Complete the form."),
