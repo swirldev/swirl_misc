@@ -3,20 +3,21 @@ library(shiny)
 shinyUI(pageWithSidebar(
   
   # Lesson name will go here
-  headerPanel("Lesson Name Here"),
+  headerPanel("swirl content authoring tool"),
   
   # Select unit class
   sidebarPanel(
     
-    helpText("Every time you select a content type, fill in the corresponding 
-             form, and press the 'Add it!' button below, new content will
-             be appended to your lesson. When you're done adding new content,
-             press the <esc> key to exit."),
-    
+    helpText(tags$ol(tags$li("Select a content type."),
+                     tags$li("Complete the form."),
+                     tags$li("Press the ", em("Add it!"), " button."),
+                     tags$li("Repeat steps 1-3 until complete."),
+                     tags$li("Press", em("I'm done!"), " to exit."))),
+
     br(),
     
     # Select unit class
-    selectInput("class", "What type of content would you like to add?",
+    selectInput("class", "Content type:",
                 choices = c("Text" = "text", 
                             "Question - R Command" = "cmd_question",
                             "Question - Multiple Choice" = "mult_question",
@@ -36,7 +37,7 @@ shinyUI(pageWithSidebar(
     conditionalPanel(
       condition = "input.class == 'text'",
       tags$textarea(id="text_output", rows=3, cols=40, 
-                    placeholder="Text")
+                    placeholder="Text output")
       ),
     
     # Command question form
@@ -45,7 +46,7 @@ shinyUI(pageWithSidebar(
     	tags$textarea(id="cmd_output", rows=3, cols=40, 
     	              placeholder="Question"),
     	tags$textarea(id="cmd_correct_answer", rows=3, cols=40,
-                    placeholder="Correct answer"),
+                    placeholder="Correct answer (a valid R expression)"),
     	tags$textarea(id="cmd_answer_tests", rows=3, cols=40, 
                     placeholder="Answer tests (separated by semi-colons)"),
     	tags$textarea(id="cmd_hint", rows=3, cols=40, 
@@ -56,11 +57,11 @@ shinyUI(pageWithSidebar(
 		conditionalPanel(
 		  condition = "input.class == 'mult_question'",
 		  tags$textarea(id="mult_output", rows=3, cols=40, 
-		                placeholder="Question"),
-		  tags$textarea(id="mult_answer_choices", rows=3, cols=40,
-		                placeholder="Correct answer"),
+		                placeholder="Question"),      
+      tags$textarea(id="mult_answer_choices", rows=3, cols=40,
+		                placeholder="Answer choices (one per line, no maximum)"),
 		  tags$textarea(id="mult_correct_answer", rows=3, cols=40,
-		                placeholder="Answer tests (separated by semi-colons)"),
+		                placeholder="Correct answer (must match exactly one answer choice)"),
 		  tags$textarea(id="mult_hint", rows=3, cols=40, 
 		                placeholder="Hint")
       ),
@@ -71,7 +72,7 @@ shinyUI(pageWithSidebar(
 		  tags$textarea(id="num_output", rows=3, cols=40, 
 		                placeholder="Question"),
 		  tags$textarea(id="num_correct_answer", rows=3, cols=40,
-		                placeholder="Correct answer"),
+		                placeholder="Correct answer (a decimal number or integer)"),
 		  tags$textarea(id="num_hint", rows=3, cols=40, 
 		                placeholder="Hint")
       ),
@@ -80,23 +81,26 @@ shinyUI(pageWithSidebar(
 		conditionalPanel(
 		  condition = "input.class == 'video'",
 		  tags$textarea(id="video_output", rows=3, cols=40, 
-		                placeholder="Would you like to watch a video on..."),
+		                placeholder="Would you like to watch a video about <insert topic here> ?"),
 		  tags$textarea(id="video_link", rows=3, cols=40, 
-		                placeholder="Video URL")
+		                placeholder="Video URL (http://youtu.be/S1tBTlrx0JY)")
       ),
     
     # Figure form
 		conditionalPanel(
 		  condition = "input.class == 'figure'",
 		  tags$textarea(id="fig_output", rows=3, cols=40, 
-		                placeholder="Text"),
+		                placeholder="Text output"),
 		  tags$textarea(id="figure", rows=3, cols=40, 
-		                placeholder="Figure file name (.R extension)"),
-		  tags$textarea(id="figure_type", rows=3, cols=40, 
-		                placeholder="new or add?")
+		                placeholder="my_figure.R"),
+		  selectInput("figure_type", "Figure type:",
+                  choices = c("New" = "new", "Additional" = "add"))
       ),
     
-    # Action button for when form is complete
-    actionButton("finalSubmit", "Add it!")
+    # Button to add unit
+    actionButton("addit", "Add it!"),
+    
+    # Button to close the authoring tool
+    actionButton("done", "I'm done!")
     )
 ))

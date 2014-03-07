@@ -9,7 +9,7 @@ shinyServer(function(input, output) {
   
   # When submit button is pressed, it's value increments to 1
   observe({
-    if(input$finalSubmit == 0) {
+    if(input$addit == 0) {
       return()
     }
     
@@ -50,5 +50,13 @@ shinyServer(function(input, output) {
     
     # Return only non-empty values
     stopApp(return_vals)
+  })
+  
+  observe({
+    if(input$done == 0) {
+      return()
+    }
+    # Quit and return "done" to break loop
+    stopApp(NULL)
   })
 })
