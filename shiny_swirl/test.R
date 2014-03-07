@@ -4,7 +4,8 @@ library(yaml)
 # Write a single unit using shiny GUI
 write_unit <- function(lessonFile) {
   # Returns unit info, or NULL if done
-  vals <- runApp(launch.browser = rstudio::viewer)
+  vals <- runApp("~/Dropbox/R_Working_Directory/swirl_misc/shiny_swirl/",
+                 launch.browser = rstudio::viewer)
   # If NULL, then user is done
   if(is.null(vals)) {
     return(NULL)
@@ -17,8 +18,13 @@ write_unit <- function(lessonFile) {
 }
 
 newYaml <- function(course, lesson) {
-  lessonDir <<- file.path(gsub(" ", "_", course), gsub(" ", "_", lesson))
-  if(!file.exists(lessonDir)) dir.create(lessonDir, recursive=TRUE)
+  courseDir <<- gsub(" ", "_", course)
+  lessonDir <<- gsub(" ", "_", lesson)
+  if(!file.exists(lessonDir)) {
+    dir.create(file.path(courseDir, lessonDir), recursive=TRUE)
+    # Move into course directory
+    setwd(courseDir)
+  }
   writeLines("# Put initialization code in this file.", 
              file.path(lessonDir, "initLesson.R"))
   writeLines("# Put custom tests in this file.", 

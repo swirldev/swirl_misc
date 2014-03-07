@@ -1,6 +1,6 @@
 library(shiny)
 
-shinyUI(pageWithSidebar(
+shinyUI(bootstrapPage(
     
   # Lesson name will go here
   headerPanel("swirl content authoring tool"),
@@ -8,8 +8,19 @@ shinyUI(pageWithSidebar(
   # Select unit class
   sidebarPanel(
     
-#     tags$style(type="text/css", ".well { background-color: #466BB0; }",
-#                "ol { color: white; }", ".control-label { color: white; }"),
+    tags$link(
+      rel = "stylesheet", 
+      href = "http://fonts.googleapis.com/css?family=Source+Sans+Pro"
+    ),
+    
+    tags$style("body { font-family: 'Source Sans Pro', sans-serif; }",
+               "h1 { color: #3399ff; }",
+               "#addit { color: #3399ff; }",
+               "#done { color: red; }",
+               "button { font-family: inherit; }",
+               "textarea { font-family: inherit; }",
+               "select { font-family: inherit; }"
+    ),
     
     helpText(tags$ol(tags$li("Select a content type."),
                      tags$li("Complete the form."),
