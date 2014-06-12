@@ -1,0 +1,31 @@
+---
+Course: Test Course
+Lesson: Test Lesson
+Author: Sean Kross
+Type: Standard
+Organization: JHU
+Version: 2.2.6
+---
+
+This is a text question. Isn't this cool? When you're done, hit enter.
+
+---
+
+This is an R Command question. Can you add 2 + 2?
+
+```
+2+2
+```
+
+#Text that starts with a pound sign is a hint
+
+---
+
+This is a multiple choice question. The star indicates the correct answer. Which did you prefer at lunch yesterday?
+
+- potato
+* iced tea
+- ribs
+- salad
+
+# pick the iced tea
