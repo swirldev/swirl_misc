@@ -43,22 +43,41 @@ makemd.mult_question <- function(unit) {
         sep="\n\n")
 }
 
-# Set lesson path
-lespath <- "swirl_courses/R_Programming/Apply_Family_of_Functions_-_Part_1/lesson.yaml"
-les <- yaml.load_file(lespath)
-les <- les[-1] # Remove meta
-# Set dest path
-dest <- "~/Desktop/applyfam.Rmd"
-# Get initLesson.R info and write no echo chunk
-initpath <- file.path(dirname(lespath), "initLesson.R")
-initcode <- paste(readLines(initpath, warn=FALSE), collapse="\n")
-initcode <- paste("suppressPackageStartupMessages(library(swirl))", 
-                  initcode, sep="\n")
-cat(makechunk_noecho(initcode), "\n\n", file=dest)
-# Write the rest of the content
-for(unit in les) {
-  class(unit) <- unit[['Class']]
-  out <- paste(makemd(unit), "\n\n")
-  cat(out, file=dest, append=TRUE)
-  invisible()
+swirl2html <- function(lessonPath, destDir) { 
+  # Set destination file for Rmd
+  destrmd <- file.path(destDir, "lesson.Rmd")
+  # Load yaml
+  les <- yaml.load_file(lessonPath)
+  # Get and remove meta
+  meta <- unlist(les[1])
+  les <- les[-1]
+  # Write meta to document header
+  cat('---',
+      paste('title:', meta['Lesson']),
+      'output:',
+      '  html_document:',
+      '    theme: spacelab',
+      '---\n',
+      sep="\n", file=destrmd)
+  # Get initLesson.R info and write init chunk w/ no echo
+  initpath <- file.path(dirname(lessonPath), "initLesson.R")
+  initcode <- paste(readLines(initpath, warn=FALSE), collapse="\n")
+  initcode <- paste("suppressPackageStartupMessages(library(swirl))", 
+                    initcode, sep="\n")
+  cat(makechunk_noecho(initcode), "\n\n", file=destrmd, append=TRUE)
+  # Write the rest of the content
+  for(unit in les) {
+    class(unit) <- unit[['Class']]
+    out <- paste(makemd(unit), "\n\n")
+    cat(out, file=destrmd, append=TRUE)
+    invisible()
+  }
+  message("Opening R Markdown file...")
+  file.edit(destrmd)
+  message("Knitting html...")
+  rmarkdown::render(destrmd)
+  # Path to html document
+  desthtml <- file.path(destDir, "lesson.html")
+  message("Opening html document...")
+  browseURL(desthtml)
 }
