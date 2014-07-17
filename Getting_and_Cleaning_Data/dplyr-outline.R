@@ -49,14 +49,15 @@ summarize(cran, avg_bytes = mean(size))
 
 ### group_by()
 packages <- group_by(cran, package)
-downloads <- summarize(packages,
-                       count = n(),
-                       unique = n_distinct(ip_id),
-                       avg_bytes = mean(size))
+popular <- summarize(packages,
+                     count = n(),
+                     unique = n_distinct(ip_id),
+                     countries = n_distinct(country),
+                     avg_bytes = mean(size))
 
-top_counts <- filter(downloads, count > 750)
-arrange(top_downloads, desc(count))
-head(arrange(top_downloads, desc(count)), 20)
+top_counts <- filter(popular, count > 750)
+arrange(popular, desc(count))
+head(arrange(popular, desc(count)), 20)
 
 top_unique <- filter(downloads, unique > 500)
 arrange(top_unique, desc(unique))
@@ -77,22 +78,33 @@ arrange(setup_ss, desc(count))
 arrange(setup_ss, desc(dist_packages))
 arrange(setup_ss, desc(prop_linux))
 
-
-my_mode <- function(x) {
+# Give attribution here - SO thread
+most_common <- function(x) {
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
 }
 
-summarize(countries,
-          count = n(),
-          dist_packages = n_distinct(package),
-          os_mode = my_mode(r_os),
-          process_mode = my_mode(r_arch))
-                   
+setup <- summarize(countries,
+                   count = n(),
+                   dist_packages = n_distinct(package),
+                   mc_os = most_common(r_os),
+                   mc_process = most_common(r_arch),
+                   mc_r_version = most_common(r_version))
+arrange(setup, mc_r_version)
 
 ### Chaining
 cran %>%  
   select(ip_id, country, package, size) %>%
-  mutate(size_mb = size / 2^20)
+  mutate(size_mb = size / 2^20) %>%
+  arrange(desc(size_mb))
 
-
+cran %>%
+  select(r_os, r_version, package, version) %>%
+  filter(package == "swirl") %>%
+  group_by(version) %>%
+  summarize(count = n(),
+            num_os = n_distinct(r_os), 
+            num_r_vers = n_distinct(r_version),
+            num_old_r = sum(r_version <= "3.1.1", na.rm=TRUE))
+  
+  
