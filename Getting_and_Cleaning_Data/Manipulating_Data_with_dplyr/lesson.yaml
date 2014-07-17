@@ -6,8 +6,47 @@
   Organization: JHU Biostat
   Version: 2.2.12
 
+- Class: text
+  Output: In this lesson, you'll learn how to manipulate data using dplyr. dplyr is a fast and powerful R package written by Hadley Wickham and Romain Francois that provides a consistent and concise grammer for manipulating tabular data. 
+
+- Class: text
+  Output: One unique aspect of dplyr is that the same set of tools allow you to work with tabular data from a variety of sources, including data frames, data tables, databases and multidimensional arrays. In this lesson, we'll focus on data frames, but everything you learn will apply equally to other formats.
+
+- Class: text
+  Output: 'As you may know, "CRAN is a network of ftp and web servers around the world that store identical, up-to-date, versions of code and documentation for R" (http://cran.rstudio.com/). RStudio maintains one of these so-called ''CRAN mirrors'' and they generously make their download logs publicly available (http://cran-logs.rstudio.com/). We''ll be working with the log from July 8, 2014, which contains information on roughly 225,000 package downloads.'
+
 - Class: cmd_question
-  Output: "I've created a variable called path2csv, which contains the full file path to the dataset we'll be using in this lesson. Call read.csv() with two arguments, path2csv and as.is = TRUE, and save the result in a new variable called cran. The first argument tells R where to find the dataset and the second argument tells R not to convert character variables to factors. Check ?read.csv if you need help."
-  CorrectAnswer: cran <- read.csv(path2csv, as.is = TRUE)
-  AnswerTests: omnitest(correctExpr='cran <- read.csv(path2csv, as.is = TRUE)')
-  Hint: Store the result of read.csv(path2csv, as.is = TRUE) in a new variable called cran.
+  Output: "I've created a variable called path2csv, which contains the full file path to the dataset. Call read.csv() with two arguments, path2csv and as.is = TRUE, and save the result in a new variable called mydf. Check ?read.csv if you need help."
+  CorrectAnswer: mydf <- read.csv(path2csv, as.is = TRUE)
+  AnswerTests: omnitest(correctExpr='mydf <- read.csv(path2csv, as.is = TRUE)')
+  Hint: Store the result of read.csv(path2csv, as.is = TRUE) in a new variable called mydf.
+
+- Class: cmd_question
+  Output: Use dim() to look at the dimensions of mydf.
+  CorrectAnswer: dim(mydf)
+  AnswerTests: omnitest(correctExpr='dim(mydf)')
+  Hint: dim(mydf) will give you the dimensions of the dataset.
+
+- Class: cmd_question
+  Output: Now use head() to preview the data.
+  CorrectAnswer: head(mydf)
+  AnswerTests: omnitest(correctExpr='head(mydf)')
+  Hint: head(mydf) will show you the first six rows of mydf.
+
+- Class: cmd_question
+  Output: The dplyr package was automatically installed (if necessary) and loaded at the beginning of this lesson. Normally, this is something you would have to do on your own. Just to build the habit, type library(dplyr) now to load the package again.
+  CorrectAnswer: library(dplyr)
+  AnswerTests: omnitest(correctExpr='library(dplyr)')
+  Hint: Use library(dplyr) to load the dplyr package.
+
+- Class: cmd_question
+  Output: "The first step of working with data in dplyr is to load the data into what the package authors call a 'data frame tbl' or 'tbl_df'. Use the following code to create a new tbl_df called cran: \n\ncran <- tbl_df(mydf)."
+  CorrectAnswer: cran <- tbl_df(mydf)
+  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)')
+  Hint: Type cran <- tbl_df(mydf) to create a new tbl_df called cran.
+
+- Class: cmd_question
+  Output: From ?tbl_df, "The main advantage to using a tbl_df over a regular data frame is the printing." Let's see what is meant by this. Type cran to print our tbl_df to the console.
+  CorrectAnswer: cran
+  AnswerTests: omnitest(correctExpr='cran')
+  Hint: Type cran to print our tbl_df to the console.
