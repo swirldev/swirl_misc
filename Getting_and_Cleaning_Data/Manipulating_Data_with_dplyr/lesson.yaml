@@ -1,0 +1,13 @@
+- Class: meta
+  Course: Getting and Cleaning Data
+  Lesson: Manipulating Data with dplyr
+  Author: Nick Carchedi
+  Type: Coursera
+  Organization: JHU Biostat
+  Version: 2.2.12
+
+- Class: cmd_question
+  Output: "I've created a variable called path2csv, which contains the full file path to the dataset we'll be using in this lesson. Call read.csv() with two arguments, path2csv and as.is = TRUE, and save the result in a new variable called cran. The first argument tells R where to find the dataset and the second argument tells R not to convert character variables to factors. Check ?read.csv if you need help."
+  CorrectAnswer: cran <- read.csv(path2csv, as.is = TRUE)
+  AnswerTests: omnitest(correctExpr='cran <- read.csv(path2csv, as.is = TRUE)')
+  Hint: Store the result of read.csv(path2csv, as.is = TRUE) in a new variable called cran.
