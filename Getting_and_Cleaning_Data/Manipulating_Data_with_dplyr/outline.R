@@ -20,6 +20,10 @@ cran <- tbl_df(df)
 cran
 ?manip
 
+# "The dplyr philosophy is to have small functions that each do 
+# one thing well."
+
+
 ### select()
 select(cran, ip_id, package, country) # reorders
 select(cran, r_arch:country)
