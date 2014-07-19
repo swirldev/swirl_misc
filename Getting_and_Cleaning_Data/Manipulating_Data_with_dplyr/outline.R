@@ -27,7 +27,7 @@ cran
 ### select()
 select(cran, ip_id, package, country) # reorders
 select(cran, r_arch:country)
-select(cran, -c(X:time, r_arch))
+select(cran, -(X:time))
 select(cran, ip_id:size)
 
 ### filter()

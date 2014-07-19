@@ -1,3 +1,6 @@
+# Turn off double evaluation to make things faster
+AUTO_DETECT_NEWVAR <- FALSE
+
 match_call <- function(correct_call = NULL) {
   e <- get("e", parent.frame())
   # Trivial case

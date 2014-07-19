@@ -46,7 +46,165 @@
   Hint: Type cran <- tbl_df(mydf) to create a new tbl_df called cran.
 
 - Class: cmd_question
+  Output: To avoid confusion and keep things running smoothly, let's remove the original dataframe from your workspace with rm("mydf").
+  CorrectAnswer: rm("mydf")
+  AnswerTests: omnitest(correctExpr='rm("mydf")')
+  Hint: Use rm("mydf") to remove the original dataframe from your workspace.
+
+- Class: cmd_question
   Output: From ?tbl_df, "The main advantage to using a tbl_df over a regular data frame is the printing." Let's see what is meant by this. Type cran to print our tbl_df to the console.
   CorrectAnswer: cran
   AnswerTests: omnitest(correctExpr='cran')
   Hint: Type cran to print our tbl_df to the console.
+
+- Class: text
+  Output: This output is much more informative and compact than what we would get if we printed the original data frame (mydf) to the console.
+
+- Class: text
+  Output: First, are shown the class and dimensions of the dataset. Just below that, we get a preview of the data. Instead of attempting to print the entire dataset, we are just just shown the first 10 rows of data and only as many columns as fit neatly in our console. At the bottom, we see the names and classes for any variables that didn't fit on our screen.
+
+- Class: text
+  Output: 'According to the "Introduction to dplyr" vignette written by the package authors, "The dplyr philosophy is to have small functions that each do one thing well." In particular, dplyr supplies five ''verbs'' that cover all fundamental data manipulation tasks: select(), filter(), arrange(), mutate(), and summarize().'
+
+- Class: cmd_question
+  Output: Use ?manip to pull up the documentation for these core functions.
+  CorrectAnswer: ?manip
+  AnswerTests: omnitest(correctExpr='?manip')
+  Hint: ?manip will display the documentation for dplyr's five core data manipulation functions.
+
+- Class: cmd_question
+  Output: As may often be the case, particularly with larger datasets, we are only interested in some of the variables. Use select(cran, ip_id, package, country) to select only the ip_id, package, and country variables from the cran dataset.
+  CorrectAnswer: select(cran, ip_id, package, country)
+  AnswerTests: omnitest(correctExpr='select(cran, ip_id, package, country)')
+  Hint: Type select(cran, ip_id, package, country) to select only the ip_id, package, and country from the cran dataset.
+
+- Class: text
+  Output: The first thing to notice is that we don't have to type cran$ip_id, cran$package, and cran$country, as we normally would when referring to columns of a data frame. The select() function knows we are referring to columns of the cran dataset.
+
+- Class: text
+  Output: Also, note that the columns are returned to us in the order we specified, even though ip_id is the rightmost column in the full dataset.
+
+- Class: cmd_question
+  Output: Recall that in R, the `:` operator provides a compact notation for creating a sequence of numbers. For example, try 5:20.
+  CorrectAnswer: 5:20
+  AnswerTests: omnitest(correctExpr='5:20')
+  Hint: Type 5:20 to see how `:` can be used to create a sequence of numbers.
+
+- Class: cmd_question
+  Output: Normally, this notation is reserved for numbers, but select() allows you to specify a sequence of columns this way, which can save a bunch of typing. Use select(cran, r_arch:country) to select all columns starting from r_arch and ending with country.
+  CorrectAnswer: select(cran, r_arch:country)
+  AnswerTests: omnitest(correctExpr='select(cran, r_arch:country)')
+  Hint: select(cran, r_arch:country) will select all columns from r_arch through country (left to right).
+
+- Class: cmd_question
+  Output: The same can be done in reverse order. Give it a try.
+  CorrectAnswer: select(cran, country:r_arch)
+  AnswerTests: omnitest(correctExpr='select(cran, country:r_arch)')
+  Hint: select(cran, country:r_arch) will select all columns starting from country and ending with r_arch (right to left).
+
+- Class: cmd_question
+  Output: Print the entire dataset again, just to remind yourself of what it looks like. You can do this at anytime during during this lesson.
+  CorrectAnswer: cran
+  AnswerTests: omnitest(correctExpr='cran')
+  Hint: Print cran to the console to remind yourself what it looks like.
+
+- Class: cmd_question
+  Output: Instead of specifying the columns we want to keep, we can also specify the columns we want to throw away. To see how this works, do select(cran, -time) to omit the time column.
+  CorrectAnswer: select(cran, -time)
+  AnswerTests: omnitest(correctExpr='select(cran, -time)')
+  Hint: Use select(cran, time) to get rid of the time column.
+
+- Class: cmd_question
+  Output: The negative sign in front of time tells select() that we DON'T want the time column. Now, let's combine strategies to omit all columns from X through size (X:size). To see how this might work, start by looking at the output from -5:20.
+  CorrectAnswer: -5:20
+  AnswerTests: omnitest(correctExpr='-5:20')
+  Hint: See what -5:20 gives us.
+
+- Class: cmd_question
+  Output: Oops! That gaves us a vector of numbers from -5 through 20, which is not what we want. Instead, we want to negate the entire sequence of numbers from 5 through 20, so that we get -5, -6, -7, ... , -18, -19, -20. Try the same thing, except surround 5:10 with parentheses so that R knows we want it to first come up with the sequence of numbers, then apply the negative sign to the whole thing.
+  CorrectAnswer: -(5:20)
+  AnswerTests: omnitest(correctExpr='-(5:20)')
+  Hint: -(5:20) will do the job.
+
+- Class: cmd_question
+  Output: Use this knowledge to omit all columns X:size using select().
+  CorrectAnswer: select(cran, -(X:size))
+  AnswerTests: omnitest(correctExpr='select(cran, -(X:size))')
+  Hint: Use select(cran, -(X:size)) to omit all columns from X through size.
+
+- Class: cmd_question
+  Output: Now that you know how to select a subset of columns using select() and naturally next question is "How do I select a subset of rows?" That's where the filter() function comes in. Use filter(cran, package == "swirl") to select all rows for which the package variable is equal to "swirl". Be sure to use two equals signs side-by-side!
+  CorrectAnswer: filter(cran, package == "swirl")
+  AnswerTests: omnitest(correctExpr='filter(cran, package == "swirl")')
+  Hint: filter(cran, package == "swirl") will give you only those rows for which the package variable is equal to "swirl".
+
+- Class: text
+  Output: Again, note that filter() recognizes 'package' as a column of cran, without you having to explicitly specify cran$package.
+
+- Class: text
+  Output: The == operator asks whether the thing on the left is equal to the thing on the right. If yes, then it returns TRUE. If no, then FALSE. In this case, package is an entire vector (column) of values, so package == "swirl" returns a vector of TRUEs and FALSEs. filter() then returns only the rows of cran corresponding to the TRUEs.
+
+- Class: cmd_question
+  Output: You can specify as many conditions as you want, separated by commas. For example filter(cran, r_version == "3.1.1", country == "US") will return all rows of cran corresponding to downloads from users in the US running R version 3.1.1. Try it out.
+  CorrectAnswer: filter(cran, r_version == "3.1.1", country == "US")
+  AnswerTests: omnitest(correctExpr='filter(cran, r_version == "3.1.1", country == "US")')
+  Hint: filter(cran, r_version == "3.1.1", country == "US") will return all rows of cran corresponding to downloads from users in the US running R version 3.1.1. Don't forget the quotes around 3.1.1 and US!
+
+- Class: cmd_question
+  Output: The conditions passed to filter() can make use of any of the standard comparison operators. Pull up the relevant documentation with ?Comparison (that's an uppercase C).
+  CorrectAnswer: ?Comparison
+  AnswerTests: omnitest(correctExpr='?Comparison')
+  Hint: ?Comparison will pull up the relevant help file.
+
+- Class: cmd_question
+  Output: Edit your previous call to filter() to instead return rows corresponding to users in "IN" (India) running an R version that is less than or equal to "3.0.2". The up arrow on your keyboard may come in handy here. Don't forget your double quotes!
+  CorrectAnswer: filter(cran, r_version <= "3.1.1", country == "IN")
+  AnswerTests: any_of_exprs('filter(cran, r_version <= "3.1.1", country == "IN")', 'filter(cran, country == "IN", r_version <= "3.1.1")')
+  Hint: filter(cran, r_version <= "3.1.1", country == "IN") will return all rows for which r_version is less than or equal to "3.0.2" and country is equal to "IN".
+
+- Class: cmd_question
+  Output: Our last two calls to filter() requested all rows for which some condition AND another condition were TRUE. We can also request rows for which EITHER one condition OR another condition are TRUE. For example, filter(cran, country == "US" | country == "IN") will gives us all rows for which the country variable equals either "US" or "IN". Give it a go.
+  CorrectAnswer: filter(cran, country == "US" | country == "IN")
+  AnswerTests: any_of_exprs('filter(cran, country == "US" | country == "IN")', 'filter(cran, country == "IN" | country == "US")')
+  Hint: filter(cran, country == "US" | country == "IN") will return all rows for which country equals "US" or "IN".
+
+- Class: cmd_question
+  Output: 'Now, use filter() to fetch all rows for which size is strictly greater than (>) 100500 (no quotes, since size is numeric) AND r_os equals "linux-gnu". Hint: You are passing three arguments to filter(): the name of the dataset, the first condition, and the second condition.'
+  CorrectAnswer: filter(cran, size > 100500, r_os == "linux-gnu")
+  AnswerTests: any_of_exprs('filter(cran, size > 100500, r_os == "linux-gnu")', 'filter(cran, r_os == "linux-gnu"), size > 100500')
+  Hint: This is a tricky one. filter(cran, size > 100500, r_os == "linux-gnu") will give us all rows for which size is strictly greater than 100500 and r_os is "linux-gnu".
+
+- Class: text
+  Output: Finally, we want to get only the rows for which the r_version is not missing. R represents missing values with NA and these missing values can be detected using the is.na() function. 
+
+- Class: cmd_question
+  Output: To see how this works, try is.na(c(3, 5, NA, 10)).
+  CorrectAnswer: is.na(c(3, 5, NA, 10))
+  AnswerTests: omnitest('is.na(c(3, 5, NA, 10))')
+  Hint: Try is.na(c(3, 5, NA, 10)) to see how is.na() works.
+
+- Class: cmd_question
+  Output: 'Now, put an exclamation point (!) before is.na() to change all of the TRUEs to FALSEs and all of the FALSEs to TRUEs, thus telling us what is NOT NA: !is.na(c(3, 5, NA, 10)).'
+  CorrectAnswer: !is.na(c(3, 5, NA, 10))
+  AnswerTests: omnitest('!is.na(c(3, 5, NA, 10))')
+  Hint: !is.na(c(3, 5, NA, 10)) will negate the previous command, thus telling us what is NOT NA.
+
+- Class: cmd_question
+  Output: 'Okay, ready to put all of this together? Use filter() to return all rows of cran for which r_version is NOT NA. Hint: You will need to use !is.na() as part of your second argument to filter().'
+  CorrectAnswer: filter(cran, !is.na(r_version))
+  AnswerTests: omnitest('filter(cran, !is.na(r_version))')
+  Hint: This is another tricky one. filter(cran, !is.na(r_version)) will give return all rows of cran for which r_version is NOT NA.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
