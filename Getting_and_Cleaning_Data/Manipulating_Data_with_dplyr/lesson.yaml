@@ -195,15 +195,86 @@
   AnswerTests: omnitest('filter(cran, !is.na(r_version))')
   Hint: This is another tricky one. filter(cran, !is.na(r_version)) will give return all rows of cran for which r_version is NOT NA.
 
+- Class: text
+  Output: We seen how to select a subset of columns and rows from our dataset using select() and filter(), respectively. Inherent in select() was also the ability to arrange our selected columns in any order we please.
 
+- Class: text
+  Output: Sometimes we want to order the rows of a dataset according to the values of a particular variable. This is the job of arrange().
 
+- Class: cmd_question
+  Output: To order the rows of our cran dataset so that ip_id is in ascending order (from small to large), type arrange(cran, ip_id).
+  CorrectAnswer: arrange(cran, ip_id)
+  AnswerTests: omnitest('arrange(cran, ip_id)')
+  Hint: arrange(cran, ip_id) will order the rows of our dataset from smallest ip_id to largest ip_id.
 
+- Class: cmd_question
+  Output: To do the same, but in descending order, change the second argument to desc(ip_id), where desc() stands for 'descending'. Go ahead.
+  CorrectAnswer: arrange(cran, desc(ip_id))
+  AnswerTests: omnitest('arrange(cran, desc(ip_id))')
+  Hint: arrange(cran, desc(ip_id)) will order the rows of our dataset from largest ip_id to smallest ip_id.
 
+- Class: cmd_question
+  Output: We can also arrange the data according to the values of multiple variables. For example, arrange(cran, package, ip_id) will first arrange by package names (ascending alphabetically), then by ip_id. This means that if there are multiple rows with the same value for package, they will be sorted by ip_id (ascending numerically). Try arrange(cran, package, ip_id) now.
+  CorrectAnswer: arrange(cran, package, ip_id)
+  AnswerTests: omnitest('arrange(cran, package, ip_id)')
+  Hint: Use arrange(cran, package, ip_id) to sort the data primarily by package name and secondarily by ip_id.
 
+- Class: cmd_question
+  Output: 'Arrange the cran dataset by the following three variables, in this order: country (ascending), r_version (descending), and ip_id (ascending).'
+  CorrectAnswer: arrange(cran, country, desc(r_version), ip_id)
+  AnswerTests: omnitest('arrange(cran, country, desc(r_version), ip_id)')
+  Hint: arrange(cran, country, desc(r_version), ip_id) will sort the data by country (ascending) first, then by r_version (descending), and finally by ip_id (ascending).
 
+- Class: cmd_question
+  Output: To illustrate the next major function in dplyr, let's take a subset of our original data. Use select() to grab 3 columns -- ip_id, package, and size (in that order) -- and store the result in a new variable called cran_alt.
+  CorrectAnswer: cran_alt <- select(cran, ip_id, package, size)
+  AnswerTests: omnitest('cran_alt <- select(cran, ip_id, package, size)')
+  Hint: cran_alt <- select(cran, ip_id, package, size) will store just these three columns in a new variable called cran_alt.
 
+- Class: cmd_question
+  Output: Take a look at cran_alt now.
+  CorrectAnswer: cran_alt
+  AnswerTests: any_of_exprs('cran_alt', 'print(cran_alt)')
+  Hint: Type cran_alt to view its contents.
 
+- Class: text
+  Output: It's common to create a new variable based on the value of one or more variables already in a dataset. The mutate() function does exactly this.
 
+- Class: text
+  Output: The size variable represents the download size in bytes, which are units of computer memory size. These days, megabytes (MB) are a more common unit of measurement. One megabyte is equal to 2^20 bytes. That's 2 to the power of 20, which is approximately one million bytes!
+
+- Class: cmd_question
+  Output: 'Now, we want to add a column called size_mb that contains the download size in megabytes. Here''s the code to do it:\n\nmutate(cran_alt, size_mb = size / 2^20)'
+  CorrectAnswer: mutate(cran_alt, size_mb = size / 2^20)
+  AnswerTests: omnitest('mutate(cran_alt, size_mb = size / 2^20)')
+  Hint: mutate(cran_alt, size_mb = size / 2^20) will add a new column called size_mb that contains the download size in megabytes.
+
+- Class: text
+  Output: An every larger unit of memory is a gigabyte (GB), which equals 2^10 megabytes. We might as well add another column for download size in gigabytes!
+
+- Class: cmd_question
+  Output: One very nice feature of mutate() is that you can use the value computed for your second column (size_mb) to create a third column, all in the same line of code. To see this in action, repeat the exact same command as above, except add a third argument creating a column that is named size_gb and equal to size_mb / 2^10.
+  CorrectAnswer: mutate(cran_alt, size_mb = size / 2^20, size_gb = size_mb / 2^10)
+  AnswerTests: omnitest('mutate(cran_alt, size_mb = size / 2^20, size_gb = size_mb / 2^10)')
+  Hint: Use mutate(cran_alt, size_mb = size / 2^20, size_gb = size_mb / 2^10) to create two new columns called size_mb and size_gb, respectively.
+
+- Class: cmd_question
+  Output: Let's try one more for practice. Pretend we discovered a glitch in the system that provided the original values for the size variable. All of the values in cran_alt are 1000 bytes less than they should be. Using cran_alt, create just one new column called correct_size that contains the corrected size.
+  CorrectAnswer: mutate(cran_alt, correct_size = size + 1000)
+  AnswerTests: omnitest('mutate(cran_alt, correct_size = size + 1000)')
+  Hint: mutate(cran_alt, correct_size = size + 1000) will create one new column that is equal to the original sizes plus 1000.
+
+- Class: cmd_question
+  Output: The last of the five core functions in dplyr, summarize(), collapses the dataset to a single row. Let's say we're interested in knowing the average download size. summarize(cran, avg_bytes = mean(size)) will yield the mean value of the size variable. Here we've chosen to label the result 'avg_bytes', but we could have named it anything.
+  CorrectAnswer: summarize(cran, avg_bytes = mean(size))
+  AnswerTests: omnitest('summarize(cran, avg_bytes = mean(size))')
+  Hint: summarize(cran, avg_bytes = mean(size)) will give us the mean size and label the result 'avg_bytes'.
+
+- Class: text
+  Output: summarize() is most useful when working with data that has been grouped by the values of a particular variable. We'll look at grouped data in the next lesson, but the idea is that summarize() will give you the requested value FOR EACH group in your dataset.
+
+- Class: text
+  Output: In this lesson, you learned how to manipulate data using dplyr's five core functions. In the next lesson, we'll look at how to take advatage of some other useful features of dplyr to make your life as a data analyst much easier.
 
 
 
