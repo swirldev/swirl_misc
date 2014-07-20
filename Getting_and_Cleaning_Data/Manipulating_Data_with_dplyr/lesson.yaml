@@ -274,7 +274,7 @@
   Output: summarize() is most useful when working with data that has been grouped by the values of a particular variable. We'll look at grouped data in the next lesson, but the idea is that summarize() will give you the requested value FOR EACH group in your dataset.
 
 - Class: text
-  Output: In this lesson, you learned how to manipulate data using dplyr's five core functions. In the next lesson, we'll look at how to take advatage of some other useful features of dplyr to make your life as a data analyst much easier.
+  Output: In this lesson, you learned how to manipulate data using dplyr's five core functions. In the next lesson, we'll look at how to take advantage of some other useful features of dplyr to make your life as a data analyst much easier.
 
 
 

@@ -1,0 +1,56 @@
+- Class: meta
+  Course: Getting and Cleaning Data
+  Lesson: Grouping and Chaining with dplyr
+  Author: Nick Carchedi
+  Type: Coursera
+  Organization: JHU Biostat
+  Version: 2.2.13
+
+- Class: text
+  Output: 'In the last lesson, you learned about the five main data manipulation ''verbs'' in dplyr: select(), filter(), arrange(), mutate(), and summarize(). The last of these, summarize(), is most powerful when applied to grouped data.'
+
+- Class: text
+  Output: The main idea behind grouping data is that you want to break up your dataset into groups of rows based on the value of some variable. The group_by() function is reponsible for doing this.
+
+- Class: text
+  Output: We'll continue where we left off with RStudio's CRAN download log from July 8, 2014, which contains information on roughly 225,000 R package downloads.
+
+- Class: cmd_question
+  Output: As with the last lesson, the dplyr package was automatically installed (if necessary) and loaded at the beginning of this lesson. Normally, this is something you would have to do on your own. Just to build the habit, type library(dplyr) now to load the package again.
+  CorrectAnswer: library(dplyr)
+  AnswerTests: omnitest(correctExpr='library(dplyr)')
+  Hint: Use library(dplyr) to load the dplyr package.
+
+- Class: cmd_question
+  Output: I've made the dataset available to you in a data frame called mydf. Put it in a 'data frame tbl' using the tbl_df() function and store the result in a variable called cran. If you're not sure what I'm talking about, you should start with the previous lesson. Otherwise, practice makes perfect!
+  CorrectAnswer: cran <- tbl_df(mydf)
+  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)')
+  Hint: Type cran <- tbl_df(mydf) to store the data in a new tbl_df called cran.
+
+- Class: cmd_question
+  Output: To avoid confusion and keep things running smoothly, let's remove the original dataframe from your workspace with rm("mydf").
+  CorrectAnswer: rm("mydf")
+  AnswerTests: omnitest(correctExpr='rm("mydf")')
+  Hint: Use rm("mydf") to remove the original dataframe from your workspace.
+
+- Class: cmd_question
+  Output: Print cran to the console.
+  CorrectAnswer: cran
+  AnswerTests: omnitest(correctExpr='cran')
+  Hint: Type cran to print its contents.
+
+- Class: cmd_question
+  Output: Our first goal is to group the data by package name. Bring up the help file for group_by().
+  CorrectAnswer: ?group_by
+  AnswerTests: any_of_exprs('?group_by', 'help(group_by)')
+  Hint: Use ?group_by to bring up the documentation.
+
+
+
+
+
+
+
+
+
+
