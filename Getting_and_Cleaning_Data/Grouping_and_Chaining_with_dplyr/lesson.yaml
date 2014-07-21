@@ -24,7 +24,7 @@
 - Class: cmd_question
   Output: I've made the dataset available to you in a data frame called mydf. Put it in a 'data frame tbl' using the tbl_df() function and store the result in a variable called cran. If you're not sure what I'm talking about, you should start with the previous lesson. Otherwise, practice makes perfect!
   CorrectAnswer: cran <- tbl_df(mydf)
-  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)')
+  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)'); expr_creates_var('cran')
   Hint: Type cran <- tbl_df(mydf) to store the data in a new tbl_df called cran.
 
 - Class: cmd_question

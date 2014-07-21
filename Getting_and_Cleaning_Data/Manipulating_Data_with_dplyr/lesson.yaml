@@ -18,7 +18,7 @@
 - Class: cmd_question
   Output: "I've created a variable called path2csv, which contains the full file path to the dataset. Call read.csv() with two arguments, path2csv and as.is = TRUE, and save the result in a new variable called mydf. Check ?read.csv if you need help."
   CorrectAnswer: mydf <- read.csv(path2csv, as.is = TRUE)
-  AnswerTests: omnitest(correctExpr='mydf <- read.csv(path2csv, as.is = TRUE)')
+  AnswerTests: omnitest(correctExpr='mydf <- read.csv(path2csv, as.is = TRUE)'); expr_creates_var('mydf')
   Hint: Store the result of read.csv(path2csv, as.is = TRUE) in a new variable called mydf.
 
 - Class: cmd_question
@@ -42,7 +42,7 @@
 - Class: cmd_question
   Output: "The first step of working with data in dplyr is to load the data into what the package authors call a 'data frame tbl' or 'tbl_df'. Use the following code to create a new tbl_df called cran: \n\ncran <- tbl_df(mydf)."
   CorrectAnswer: cran <- tbl_df(mydf)
-  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)')
+  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)'); expr_creates_var('cran')
   Hint: Type cran <- tbl_df(mydf) to create a new tbl_df called cran.
 
 - Class: cmd_question
@@ -228,7 +228,7 @@
 - Class: cmd_question
   Output: To illustrate the next major function in dplyr, let's take a subset of our original data. Use select() to grab 3 columns -- ip_id, package, and size (in that order) -- and store the result in a new variable called cran_alt.
   CorrectAnswer: cran_alt <- select(cran, ip_id, package, size)
-  AnswerTests: omnitest('cran_alt <- select(cran, ip_id, package, size)')
+  AnswerTests: omnitest('cran_alt <- select(cran, ip_id, package, size)'); expr_creates_var('cran_alt')
   Hint: cran_alt <- select(cran, ip_id, package, size) will store just these three columns in a new variable called cran_alt.
 
 - Class: cmd_question
