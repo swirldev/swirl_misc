@@ -45,6 +45,42 @@
   AnswerTests: any_of_exprs('?group_by', 'help(group_by)')
   Hint: Use ?group_by to bring up the documentation.
 
+- Class: cmd_question
+  Output: Now group cran by the package variable and store the result in a new variable called by_package.
+  CorrectAnswer: by_package <- group_by(cran, package)
+  AnswerTests: omnitest('by_package <- group_by(cran, package)'); expr_creates_var('by_package')
+  Hint: Store the result of group_by(cran, packages) in a new variable called by_package.
+
+- Class: cmd_question
+  Output: Let's take a look at by_package. Print it to the console.
+  CorrectAnswer: by_package
+  AnswerTests: any_of_exprs('by_package', 'print(by_package)')
+  Hint: Type by_package to view its contents.
+
+- Class: text
+  Output: "At the top of the output above, you'll see 'Groups: package', which tells us that this tbl has been grouped by the package variable."
+
+- Class: text
+  Output: Recall that when we applied mean(size) to the original tbl_df via summarize(), it returned a single number -- the mean of all values in the size column. We may care about what that number is, but wouldn't it be so much more interesting to look at the mean download size for each unique package?
+
+- Class: cmd_question
+  Output: That's exactly what you'll get if you use summarize() to apply mean(size) to the grouped data in by_package. Give it a shot.
+  CorrectAnswer: summarize(by_package, mean(size))
+  AnswerTests: omnitest('summarize(by_package, mean(size))')
+  Hint: 'Call summarize() with two arguments: by_package and mean(size).'
+
+- Class: text
+  Output: Instead of returning a single value, summarize() now returns the mean size for EACH package in our dataset.
+
+- Class: script
+  Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nYou may want to pull up the help files for n() and n_distinct()."
+  AnswerTests: summarize1_test()
+  Hint: Follow the directions in the script comments very carefully.
+  Script: summarize1.R
+
+
+
+
 
 
 
