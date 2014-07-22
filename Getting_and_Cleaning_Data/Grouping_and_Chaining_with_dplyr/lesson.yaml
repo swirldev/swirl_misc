@@ -10,10 +10,10 @@
   Output: 'In the last lesson, you learned about the five main data manipulation ''verbs'' in dplyr: select(), filter(), arrange(), mutate(), and summarize(). The last of these, summarize(), is most powerful when applied to grouped data.'
 
 - Class: text
-  Output: The main idea behind grouping data is that you want to break up your dataset into groups of rows based on the value of some variable. The group_by() function is reponsible for doing this.
+  Output: The main idea behind grouping data is that you want to break up your dataset into groups of rows based on the values of one or more variables. The group_by() function is reponsible for doing this.
 
 - Class: text
-  Output: We'll continue where we left off with RStudio's CRAN download log from July 8, 2014, which contains information on roughly 225,000 R package downloads.
+  Output: We'll continue where we left off with RStudio's CRAN download log from July 8, 2014, which contains information on roughly 225,000 R package downloads (http://cran-logs.rstudio.com/).
 
 - Class: cmd_question
   Output: As with the last lesson, the dplyr package was automatically installed (if necessary) and loaded at the beginning of this lesson. Normally, this is something you would have to do on your own. Just to build the habit, type library(dplyr) now to load the package again.
@@ -49,7 +49,7 @@
   Output: Now group cran by the package variable and store the result in a new variable called by_package.
   CorrectAnswer: by_package <- group_by(cran, package)
   AnswerTests: omnitest('by_package <- group_by(cran, package)'); expr_creates_var('by_package')
-  Hint: Store the result of group_by(cran, packages) in a new variable called by_package.
+  Hint: Store the result of group_by(cran, package) in a new variable called by_package.
 
 - Class: cmd_question
   Output: Let's take a look at by_package. Print it to the console.
@@ -74,12 +74,42 @@
 
 - Class: script
   Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nYou may want to pull up the help files for n() and n_distinct()."
-  AnswerTests: summarize1_test()
-  Hint: Follow the directions in the script comments very carefully.
+  AnswerTests: summarize1_test(); expr_creates_var('pack_sum')
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you.
   Script: summarize1.R
 
+- Class: cmd_question
+  Output: Print the resulting tbl, pack_sum, to the console to examine its contents.
+  CorrectAnswer: pack_sum
+  AnswerTests: any_of_exprs('pack_sum', 'print(pack_sum)')
+  Hint: Type pack_sum to view its contents.
 
+- Class: text
+  Output: The 'count' column, created with n(), contains the total number of rows (i.e. downloads) for each package. The 'unique' column, created with n_distinct(ip_id), gives the total number of unique downloads for each package, as measure by the number of distinct ip_id's. The 'countries' column, created with n_distinct(country), provides the number of countries in which the each package was downloaded. And finally, the 'avg_bytes' column, created with mean(size), contains the mean download size (in bytes) for each package.
 
+- Class: text
+  Output: It's important that you understand how each column of pack_sum was created and what it means. Now that we've summarized the data by individual packages, let's play around with it some to see what we can learn.
+
+- Class: text
+  Output: Naturally, we'd like to know which packages were most popular on the day these data were collected (July 8, 2014). Let's start by isolating the top 1% of packages, based on the total number of downloads as measured by the 'count' column.
+
+- Class: cmd_question
+  Output: We need to know the value of 'count' that splits the data into the top 1% and bottom 99% of packages based on total downloads. In statistics, this is called the 0.99, or 99%, sample quantile. Use quantile(pack_sum$count, probs = 0.99) to determine this number.
+  CorrectAnswer: quantile(pack_sum$count, probs = 0.99)
+  AnswerTests: omnitest('quantile(pack_sum$count, probs = 0.99)')
+  Hint: quantile(pack_sum$count, probs = 0.99) will give us the 0.99, or 99%, sample quantile for the 'count' variable.
+
+- Class: cmd_question
+  Output: Now we can isolate only those packages which had more than 679 total downloads. Use filter() to select all rows from pack_sum for which 'count' is strictly greater (>) than 679. Store the result in a new variable called top_counts.
+  CorrectAnswer: top_counts <- filter(pack_sum, count > 679)
+  AnswerTests: omnitest('top_counts <- filter(pack_sum, count > 679)')
+  Hint: Store the result of filter(pack_sum, count > 679) in a new variable called top_counts.
+
+- Class: cmd_question
+  Output: Now, arrange() the rows of top_counts based on the 'count' column. We want the packages with the highest number of downloads at the top, which means we want 'count' to be in descending order. If you need help, check out ?arrange and/or ?desc.
+  CorrectAnswer: arrange(pack_sum, desc(count))
+  AnswerTests: omnitest('arrange(pack_sum, desc(count))')
+  Hint: arrange(pack_sum, desc(count)) will arrange the rows of pack_sum based on the values of the 'count' variable, in descending order.
 
 
 
