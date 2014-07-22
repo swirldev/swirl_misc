@@ -15,6 +15,15 @@ top_unique <- filter(downloads, unique > 500)
 arrange(top_unique, desc(unique))
 head(arrange(top_unique, desc(unique)), 20)
 
+cran %>%
+  group_by(package) %>%
+  summarize(count = n(),
+            unique = n_distinct(ip_id),
+            countries = n_distinct(country),
+            avg_bytes = mean(size)) %>%
+  filter(countries > 60) %>%
+  arrange(desc(countries), avg_bytes) # reward packages for being small
+
 filter(downloads, package == "swirl")
 
 ###
@@ -58,9 +67,6 @@ cran %>%
             num_os = n_distinct(r_os),
             num_r_vers = n_distinct(r_version),
             num_old_r = sum(r_version <= "3.1.1", na.rm=TRUE))
-
-
-
 
 
 

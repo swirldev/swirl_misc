@@ -106,17 +106,68 @@
   Hint: Store the result of filter(pack_sum, count > 679) in a new variable called top_counts.
 
 - Class: cmd_question
-  Output: Now, arrange() the rows of top_counts based on the 'count' column. We want the packages with the highest number of downloads at the top, which means we want 'count' to be in descending order. If you need help, check out ?arrange and/or ?desc.
-  CorrectAnswer: arrange(pack_sum, desc(count))
-  AnswerTests: omnitest('arrange(pack_sum, desc(count))')
-  Hint: arrange(pack_sum, desc(count)) will arrange the rows of pack_sum based on the values of the 'count' variable, in descending order.
+  Output: Let's take a look at top_counts. Print it to the console.
+  CorrectAnswer: top_counts
+  AnswerTests: any_of_exprs('top_counts', 'print(top_counts)')
+  Hint: Type top_counts to view its contents.
 
+- Class: text
+  Output: Hey, that's the first time we've seen more than the first 10 rows of our data! By default, if the dataset your working with has more than 100 rows, dplyr will only print the first 10. Otherwise, it will print all rows, since it's not as overwhelming.
 
+- Class: cmd_question
+  Output: "In this case, there are 61 packages in our top 1%, so dplyr has printed all of them. If we only wanted to see the first 20, we use the head function like so: head(top_counts, 20)."
+  CorrectAnswer: arrange(top_counts, desc(count))
+  AnswerTests: omnitest('arrange(top_counts, desc(count))')
+  Hint: arrange(top_counts, desc(count)) will arrange the rows of top_counts based on the values of the 'count' variable, in descending order.
 
+- Class: cmd_question
+  Output: Okay, back to the task at hand. arrange() the rows of top_counts based on the 'count' column. We want the packages with the highest number of downloads at the top, which means we want 'count' to be in descending order. If you need help, check out ?arrange and/or ?desc.
+  CorrectAnswer: arrange(top_counts, desc(count))
+  AnswerTests: omnitest('arrange(top_counts, desc(count))')
+  Hint: arrange(top_counts, desc(count)) will arrange the rows of top_counts based on the values of the 'count' variable, in descending order.
 
+- Class: text
+  Output: If we use total number of downloads as our metric for popularity, then the above output shows us the top 10 most popular packages downloaded from the RStudio CRAN mirror on July 8, 2014. Not surprisingly, ggplot2 leads the pack with 4602 downloads, followed by Rcpp, plyr, rJava, ....
 
+- Class: text
+  Output: ...And if keep on going, you'll see swirl at number 43, with 820 total downloads. Sweet!
 
+- Class: text
+  Output: Perhaps we're more interested in the number of unique downloads. In other words, if a package is downloaded ten times in one day from the same computer, we may wish to count that as only one download. That's what the 'unique' column will tell us.
 
+- Class: cmd_question
+  Output: Like we did with 'count', let's find the 0.99, or 99%, quantile for the 'unique' variable with quantile(pack_sum$unique, probs = 0.99).
+  CorrectAnswer: quantile(pack_sum$unique, probs = 0.99)
+  AnswerTests: omnitest('quantile(pack_sum$unique, probs = 0.99)')
+  Hint: Use quantile(pack_sum$unique, probs = 0.99) to get the 0.99, or 99% quantile for 'unique'.
 
+- Class: cmd_question
+  Output: Apply filter() to pack_sum to select all rows corresponding to values of 'unique' that are strictly greater than 465. Assign the result to a variable called top_unique.
+  CorrectAnswer: top_unique <- filter(pack_sum, unique > 465)
+  AnswerTests: omnitest('top_unique <- filter(pack_sum, unique > 465)')
+  Hint: filter(pack_sum, unique > 465) will select all rows corresponding to values of 'unique' that are strictly greater than 465. Assign the result to top_unique.
 
+- Class: cmd_question
+  Output: Let's see our top contenders! Print top_unique to the console.
+  CorrectAnswer: top_unique
+  AnswerTests: any_of_exprs('top_unique', 'print(top_unique)')
+  Hint: Type top_unique to view its contents.
+
+- Class: cmd_question
+  Output: Now arrange() top_unique by the 'unique' column, in descending order, to see which packages were downloaded from the greatest number of unique IP addresses.
+  CorrectAnswer: arrange(top_unique, desc(unique))
+  AnswerTests: omnitest('arrange(top_unique, desc(unique))')
+  Hint: arrange(top_unique, desc(unique)) will arrange the rows of top_unique based on the values of the 'unique' variable, in descending order.
+
+- Class: text
+  Output: Now Rcpp is in the lead, followed by stringr, digest, plyr, and ggplot2. swirl moved up a few spaces to number 40, with 698 unique downloads. Oh yea!
+
+- Class: text
+  Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to an idea called 'chaining'.
+
+- Class: script
+  Output: Something interesting here....
+  AnswerTests: summarize2_test()
+  Hint: A good hint goes here.
+  Script: summarize2.R
 
