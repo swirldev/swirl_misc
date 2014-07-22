@@ -10,7 +10,7 @@ csv2yaml <- function(course, lesson, author, type, organization, version, csvfil
   for(n in 1:nrow(csv)){
     nxt = list()
     for(field in intersect(names(csv), parse_content_names)){
-      if(!is.na(csv[n, field]))nxt[[field]] <- csv[n,field]
+      if(!is.na(csv[n, field]) && !(''==csv[n, field]))nxt[[field]] <- csv[n,field]
     }
     yml[[n+1]] <- nxt
   }
