@@ -15,7 +15,7 @@ script_results_identical <- function(result_name) {
   temp <- capture.output(
     local(
       try(
-        source(e$correct_script_path, local = TRUE),
+        source(e$correct_script_temp_path, local = TRUE),
         silent = TRUE
       ),
       envir = tempenv
@@ -71,7 +71,7 @@ script_vals_identical <- function() {
       try(
         # Must use eval-parse combo, not source, if we don't force user
         # to print result
-        eval(parse(file = e$correct_script_path)),
+        eval(parse(file = e$correct_script_temp_path)),
         silent = TRUE
       )
     )
