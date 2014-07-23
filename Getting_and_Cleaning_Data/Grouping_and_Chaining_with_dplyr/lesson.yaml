@@ -175,29 +175,69 @@
   Script: summarize2.R
 
 - Class: text
-  Output: We'd like to accomplish the same result, but avoid saving our intermediate results. This requires embedding function calls within one another.
+  Output: It's worth noting that we sorted primarily by country, but used avg_bytes (in ascending order) as a tie breaker. This means that if two packages were downloaded from the same number of countries, the package with a smaller average download size received a higher ranking.
+
+- Class: text
+  Output: We'd like to accomplish the same result as the last script, but avoid saving our intermediate results. This requires embedding function calls within one another.
 
 - Class: script
-  Output: That's exactly what we've done in this script. The result is equivilent, but the code is much less readable and some of the arguments are far away from the function to which they belong. Again, just try to understand what is going on here, then submit() when you are ready to a better solution.
+  Output: That's exactly what we've done in this script. The result is equivilent, but the code is much less readable and some of the arguments are far away from the function to which they belong. Again, just try to understand what is going on here, then submit() when you are ready to see a better solution.
   AnswerTests: script_results_identical('result2'); multi_expr_creates_var('result2')
   Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize3.R
 
 - Class: script
-  Output: "In this script, we've used a special chaining operator, %>%, which is part of the dplyr package. You can pull up the related documentation with ?chain. The benefit of %>% is that it allows us to chain the function calls in a linear fashion. The code mirrors the way we think about the operations being performed.\n\nOnce again, just try to understand the code, then submit() when you are ready to a better solution."
+  Output: "In this script, we've used a special chaining operator, %>%, which is part of the dplyr package. You can pull up the related documentation with ?chain. The benefit of %>% is that it allows us to chain the function calls in a linear fashion. The code to the right of %>% operates on the result from the code to the left of %>%.\n\nOnce again, just try to understand the code, then type submit() to continue."
   AnswerTests: script_results_identical('result3'); multi_expr_creates_var('result3')
   Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize4.R
 
 - Class: text
-  Output: So, the results of the last three scripts are all identical. But, the third script provides a convenient and concise alternative to the more traditional method that we've taken previously, which involves results as we go along.
+  Output: So, the results of the last three scripts are all identical. But, the third script provides a convenient and concise alternative to the more traditional method that we've taken previously, which involves saving results as we go along.
 
 - Class: text
-  Output: Finally, let's interpret our results. It looks like Rcpp is on top with downloads from 84 different countries, followed by digest, stringr, plyr, and ggplot2. swirl jumped up the rankings again, this time to 27th.
-
-- Class: text
-  Output: It's worth noting that we sorted primarily by country, but used avg_bytes (in ascending order) as a tie breaker. This means that if two packages were downloaded from the same number of countries, the package with a smaller average download size received a higher ranking.
+  Output: It looks like Rcpp is on top with downloads from 84 different countries, followed by digest, stringr, plyr, and ggplot2. swirl jumped up the rankings again, this time to 27th.
 
 - Class: text
   Output: To help drive the point home, let's work through a few more examples of chaining.
+
+- Class: script
+  Output: Let's build a chain of dplyr commands one step at a time, starting with the script I just opened for you.
+  AnswerTests: script_vals_identical()
+  Hint: This is a hint!
+  Script: chain1.R
+
+- Class: script
+  Output: Let's add to the chain.
+  AnswerTests: script_vals_identical()
+  Hint: Here is a hint!
+  Script: chain2.R
+
+- Class: script
+  Output: A little bit more now.
+  AnswerTests: script_vals_identical()
+  Hint: Here is a hint!
+  Script: chain3.R
+
+- Class: script
+  Output: And finish it off.
+  AnswerTests: script_vals_identical()
+  Hint: Here is a hint!
+  Script: chain4.R
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
