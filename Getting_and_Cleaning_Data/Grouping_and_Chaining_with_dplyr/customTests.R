@@ -1,22 +1,5 @@
 AUTO_DETECT_NEWVAR <- FALSE
 
-summarize1_test <- function() {
-  # Get e and the script contents
-  e <- get("e", parent.frame())
-  contents <- e$script_contents
-
-  # Put expression in e$expr
-  e$expr <- try(parse(text = contents)[[1]], silent = TRUE)
-
-  # Dispatch to omnitest
-  omnitest('pack_sum <- summarize(by_package,
-                                  count = n(),
-                                  unique = n_distinct(ip_id),
-                                  countries = n_distinct(country),
-                                  avg_bytes = mean(size))'
-           )
-}
-
 script_results_identical <- function(result_name) {
   # Get e
   e <- get('e', parent.frame())
@@ -28,9 +11,41 @@ script_results_identical <- function(result_name) {
   }
   # Source correct result in new env and get result
   tempenv <- new.env()
-  local(source(e$correct_script_path, local = TRUE),
-        envir = tempenv)
+  # Capture output to avoid double printing
+  temp <- capture.output(
+    local(
+      try(
+        source(e$correct_script_path, local = TRUE),
+        silent = TRUE
+      ),
+      envir = tempenv
+    )
+  )
   correct_res <- get(result_name, tempenv)
   # Compare results
   identical(user_res, correct_res)
+}
+
+# Multiple expression version of expr_creates_var
+multi_expr_creates_var <- function(correctName=NULL){
+  e <- get("e", parent.frame())
+  # TODO: Eventually make auto-detection of new variables an option.
+  # Currently it can be set in customTests.R
+  delta <- if(!customTests$AUTO_DETECT_NEWVAR){
+    safeEval(e$expr, e)
+  } else {
+    e$delta
+  }
+  if(is.null(correctName)){
+    passed <- length(delta) > 0
+  } else {
+    passed <- correctName %in% names(delta)
+  }
+  passed <- isTRUE(passed)
+  if(passed){
+    e$newVar <- e$val
+    e$newVarName <- names(delta)[1]
+    e$delta <- mergeLists(delta, e$delta)
+  }
+  return(passed)
 }

@@ -2,7 +2,7 @@
 # when you think you understand it.
 
 # We've already done this part, but we're repeating it
-# to here for clarity.
+# here for clarity.
 
 by_package <- group_by(cran, package)
 pack_sum <- summarize(by_package,

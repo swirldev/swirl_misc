@@ -46,7 +46,7 @@
   Hint: Use ?group_by to bring up the documentation.
 
 - Class: cmd_question
-  Output: Now group cran by the package variable and store the result in a new variable called by_package.
+  Output: Group cran by the package variable and store the result in a new variable called by_package.
   CorrectAnswer: by_package <- group_by(cran, package)
   AnswerTests: omnitest('by_package <- group_by(cran, package)'); expr_creates_var('by_package')
   Hint: Store the result of group_by(cran, package) in a new variable called by_package.
@@ -58,7 +58,7 @@
   Hint: Type by_package to view its contents.
 
 - Class: text
-  Output: "At the top of the output above, you'll see 'Groups: package', which tells us that this tbl has been grouped by the package variable."
+  Output: "At the top of the output above, you'll see 'Groups: package', which tells us that this tbl has been grouped by the package variable. Everything else looks the same, but now any operation we apply to the grouped data will take place on a per package basis."
 
 - Class: text
   Output: Recall that when we applied mean(size) to the original tbl_df via summarize(), it returned a single number -- the mean of all values in the size column. We may care about what that number is, but wouldn't it be so much more interesting to look at the mean download size for each unique package?
@@ -74,7 +74,7 @@
 
 - Class: script
   Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nYou may want to pull up the help files for n() and n_distinct()."
-  AnswerTests: summarize1_test(); expr_creates_var('pack_sum')
+  AnswerTests: script_results_identical('pack_sum'); multi_expr_creates_var('pack_sum')
   Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you.
   Script: summarize1.R
 
@@ -88,7 +88,7 @@
   Output: The 'count' column, created with n(), contains the total number of rows (i.e. downloads) for each package. The 'unique' column, created with n_distinct(ip_id), gives the total number of unique downloads for each package, as measure by the number of distinct ip_id's. The 'countries' column, created with n_distinct(country), provides the number of countries in which the each package was downloaded. And finally, the 'avg_bytes' column, created with mean(size), contains the mean download size (in bytes) for each package.
 
 - Class: text
-  Output: It's important that you understand how each column of pack_sum was created and what it means. Now that we've summarized the data by individual packages, let's play around with it some to see what we can learn.
+  Output: It's important that you understand how each column of pack_sum was created and what it means. Now that we've summarized the data by individual packages, let's play around with it some more to see what we can learn.
 
 - Class: text
   Output: Naturally, we'd like to know which packages were most popular on the day these data were collected (July 8, 2014). Let's start by isolating the top 1% of packages, based on the total number of downloads as measured by the 'count' column.
@@ -115,10 +115,10 @@
   Output: Hey, that's the first time we've seen more than the first 10 rows of our data! By default, if the dataset your working with has more than 100 rows, dplyr will only print the first 10. Otherwise, it will print all rows, since it's not as overwhelming.
 
 - Class: cmd_question
-  Output: "In this case, there are 61 packages in our top 1%, so dplyr has printed all of them. If we only wanted to see the first 20, we use the head function like so: head(top_counts, 20)."
-  CorrectAnswer: arrange(top_counts, desc(count))
-  AnswerTests: omnitest('arrange(top_counts, desc(count))')
-  Hint: arrange(top_counts, desc(count)) will arrange the rows of top_counts based on the values of the 'count' variable, in descending order.
+  Output: "In this case, there are 61 packages in our top 1%, so dplyr has printed all of them. If we only want to see the first 20, we can use the head function like so: head(top_counts, 20)."
+  CorrectAnswer: head(top_counts, 20)
+  AnswerTests: omnitest('head(top_counts, 20)')
+  Hint: head(top_counts, 20) will display the first 20 rows of top_counts.
 
 - Class: cmd_question
   Output: Okay, back to the task at hand. arrange() the rows of top_counts based on the 'count' column. We want the packages with the highest number of downloads at the top, which means we want 'count' to be in descending order. If you need help, check out ?arrange and/or ?desc.
@@ -130,10 +130,10 @@
   Output: If we use total number of downloads as our metric for popularity, then the above output shows us the top 10 most popular packages downloaded from the RStudio CRAN mirror on July 8, 2014. Not surprisingly, ggplot2 leads the pack with 4602 downloads, followed by Rcpp, plyr, rJava, ....
 
 - Class: text
-  Output: ...And if keep on going, you'll see swirl at number 43, with 820 total downloads. Sweet!
+  Output: ...And if you keep on going, you'll see swirl at number 43, with 820 total downloads. Sweet!
 
 - Class: text
-  Output: Perhaps we're more interested in the number of unique downloads. In other words, if a package is downloaded ten times in one day from the same computer, we may wish to count that as only one download. That's what the 'unique' column will tell us.
+  Output: Perhaps we're more interested in the number of unique downloads on this particular day. In other words, if a package is downloaded ten times in one day from the same computer, we may wish to count that as only one download. That's what the 'unique' column will tell us.
 
 - Class: cmd_question
   Output: Like we did with 'count', let's find the 0.99, or 99%, quantile for the 'unique' variable with quantile(pack_sum$unique, probs = 0.99).
@@ -170,7 +170,7 @@
 
 - Class: script
   Output: I've opened up a script that contains code similar to what you've seen so far. Don't change anything. Just study it for a minute, make sure you understand everything that's there, then submit() when you are ready to move on.
-  AnswerTests: script_results_identical('result1'); expr_creates_var('result1')
+  AnswerTests: script_results_identical('result1'); multi_expr_creates_var('result1')
   Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize2.R
 
@@ -179,13 +179,13 @@
 
 - Class: script
   Output: That's exactly what we've done in this script. The result is equivilent, but the code is much less readable and some of the arguments are far away from the function to which they belong. Again, just try to understand what is going on here, then submit() when you are ready to a better solution.
-  AnswerTests: script_results_identical('result2'); expr_creates_var('result2')
+  AnswerTests: script_results_identical('result2'); multi_expr_creates_var('result2')
   Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize3.R
 
 - Class: script
   Output: "In this script, we've used a special chaining operator, %>%, which is part of the dplyr package. You can pull up the related documentation with ?chain. The benefit of %>% is that it allows us to chain the function calls in a linear fashion. The code mirrors the way we think about the operations being performed.\n\nOnce again, just try to understand the code, then submit() when you are ready to a better solution."
-  AnswerTests: script_results_identical('result3'); expr_creates_var('result3')
+  AnswerTests: script_results_identical('result3'); multi_expr_creates_var('result3')
   Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize4.R
 
