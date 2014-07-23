@@ -58,7 +58,8 @@ script_vals_identical <- function() {
   user_val <- capture.output(
     local(
       try(
-        # Must use eval-parse combo if we don't force user to print result
+        # Must use eval-parse combo, not source, if we don't force user
+        # to print result
         eval(e$expr),
         silent = TRUE
       )
@@ -68,7 +69,8 @@ script_vals_identical <- function() {
   correct_val <- capture.output(
     local(
       try(
-        # Must use eval-parse combo if we don't force user to print result
+        # Must use eval-parse combo, not source, if we don't force user
+        # to print result
         eval(parse(file = e$correct_script_path)),
         silent = TRUE
       )
