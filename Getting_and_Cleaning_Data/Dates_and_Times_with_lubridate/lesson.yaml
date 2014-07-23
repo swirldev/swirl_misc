@@ -6,3 +6,40 @@
   Organization: JHU Biostat
   Version: 2.2.13
 
+- Class: text
+  Output: In this lesson, we'll explore the lubridate R package, by Garrett Grolemund and Hadley Wickham. According to the package authors, "lubridate has a consistent, memorable syntax, that makes working with dates fun instead of frustrating." If you've ever worked with dates in R, that statement probably has your attention.
+
+- Class: cmd_question
+  Output: lubridate should have been automatically installed (if necessary) and loaded upon starting this lesson. To build the habit, we'll go ahead and (re)load the package now. Type library(lubridate) to do so.
+  CorrectAnswer: library(lubridate)
+  AnswerTests: omnitest(correctExpr='library(lubridate)')
+  Hint: Type library(lubridate) to (re)load the package.
+
+- Class: cmd_question
+  Output: lubridate contains many useful functions. We'll only be covering the basics here. Type help(package = lubridate) to bring up an overview of the package, including the package DESCRIPTION, a list of available functions, and a link to the official package vignette.
+  CorrectAnswer: help(package = lubridate)
+  AnswerTests: omnitest(correctExpr='help(package = lubridate)')
+  Hint: help(package = lubridate) will bring up the package documentation.
+
+- Class: text
+  Output: Let's get going!
+
+- Class: cmd_question
+  Output: The today() function returns today's date. Give it a try, storing the result in a new variable called td (short for 'today').
+  CorrectAnswer: today()
+  AnswerTests: omnitest(correctExpr='today()')
+  Hint: Use today() to get today's date.
+
+- Class: cmd_question
+  Output: Print the contents of td to the console.
+  CorrectAnswer: td
+  AnswerTests: any_of_exprs('td', 'print(td)')
+  Hint: Type td to print its contents.
+
+- Class: cmd_question
+  Output: There are three components to this date. In order, they are year, month, and day. We can extract any of these components using the year(), month(), or day() function respectively. Try any of those on td now.
+  CorrectAnswer: month(td)
+  AnswerTests: any_of_exprs('year(td)', 'month(td)', 'day(td)')
+  Hint: Try passing one argument, td, to year(), month(), or day().
+
+
