@@ -160,14 +160,44 @@
   Hint: arrange(top_unique, desc(unique)) will arrange the rows of top_unique based on the values of the 'unique' variable, in descending order.
 
 - Class: text
-  Output: Now Rcpp is in the lead, followed by stringr, digest, plyr, and ggplot2. swirl moved up a few spaces to number 40, with 698 unique downloads. Oh yea!
+  Output: Now Rcpp is in the lead, followed by stringr, digest, plyr, and ggplot2. swirl moved up a few spaces to number 40, with 698 unique downloads. Nice!
 
 - Class: text
   Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to an idea called 'chaining'.
 
+- Class: text
+  Output: Chaining is a method of stringing together multiple function calls in a way that is compact and readable, while still accomplishing the desired result. To make it more concrete, let's compute our last popularity metric from scratch, starting with our original data.
+
 - Class: script
-  Output: Something interesting here....
-  AnswerTests: summarize2_test()
-  Hint: A good hint goes here.
+  Output: I've opened up a script that contains code similar to what you've seen so far. Don't change anything. Just study it for a minute, make sure you understand everything that's there, then submit() when you are ready to move on.
+  AnswerTests: script_results_identical('result1'); expr_creates_var('result1')
+  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
   Script: summarize2.R
+
+- Class: text
+  Output: We'd like to accomplish the same result, but avoid saving our intermediate results. This requires embedding function calls within one another.
+
+- Class: script
+  Output: That's exactly what we've done in this script. The result is equivilent, but the code is much less readable and some of the arguments are far away from the function to which they belong. Again, just try to understand what is going on here, then submit() when you are ready to a better solution.
+  AnswerTests: script_results_identical('result2'); expr_creates_var('result2')
+  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
+  Script: summarize3.R
+
+- Class: script
+  Output: "In this script, we've used a special chaining operator, %>%, which is part of the dplyr package. You can pull up the related documentation with ?chain. The benefit of %>% is that it allows us to chain the function calls in a linear fashion. The code mirrors the way we think about the operations being performed.\n\nOnce again, just try to understand the code, then submit() when you are ready to a better solution."
+  AnswerTests: script_results_identical('result3'); expr_creates_var('result3')
+  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
+  Script: summarize4.R
+
+- Class: text
+  Output: So, the results of the last three scripts are all identical. But, the third script provides a convenient and concise alternative to the more traditional method that we've taken previously, which involves results as we go along.
+
+- Class: text
+  Output: Finally, let's interpret our results. It looks like Rcpp is on top with downloads from 84 different countries, followed by digest, stringr, plyr, and ggplot2. swirl jumped up the rankings again, this time to 27th.
+
+- Class: text
+  Output: It's worth noting that we sorted primarily by country, but used avg_bytes (in ascending order) as a tie breaker. This means that if two packages were downloaded from the same number of countries, the package with a smaller average download size received a higher ranking.
+
+- Class: text
+  Output: To help drive the point home, let's work through a few more examples of chaining.
 

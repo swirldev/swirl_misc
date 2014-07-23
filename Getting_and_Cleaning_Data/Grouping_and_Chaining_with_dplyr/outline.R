@@ -8,7 +8,7 @@ pack_sum <- summarize(by_package,
                      avg_bytes = mean(size))
 
 top_counts <- filter(pack_sum, count > 750)
-arrange(pack_sum, desc(count))
+arrange(top_counts, desc(count))
 head(arrange(pack_sum, desc(count)), 20)
 
 top_unique <- filter(downloads, unique > 500)
