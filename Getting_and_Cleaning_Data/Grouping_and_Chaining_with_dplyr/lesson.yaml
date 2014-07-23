@@ -75,7 +75,7 @@
 - Class: script
   Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nYou may want to pull up the help files for n() and n_distinct()."
   AnswerTests: script_results_identical('pack_sum'); multi_expr_creates_var('pack_sum')
-  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you.
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: summarize1.R
 
 - Class: cmd_question
@@ -171,7 +171,7 @@
 - Class: script
   Output: I've opened up a script that contains code similar to what you've seen so far. Don't change anything. Just study it for a minute, make sure you understand everything that's there, then submit() when you are ready to move on.
   AnswerTests: script_results_identical('result1'); multi_expr_creates_var('result1')
-  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
+  Hint: If you accidentally changed something in the script, just type reset() to undo your changes, then submit() again.
   Script: summarize2.R
 
 - Class: text
@@ -183,13 +183,13 @@
 - Class: script
   Output: That's exactly what we've done in this script. The result is equivilent, but the code is much less readable and some of the arguments are far away from the function to which they belong. Again, just try to understand what is going on here, then submit() when you are ready to see a better solution.
   AnswerTests: script_results_identical('result2'); multi_expr_creates_var('result2')
-  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
+  Hint: If you accidentally changed something in the script, just type reset() to undo your changes, then submit() again.
   Script: summarize3.R
 
 - Class: script
   Output: "In this script, we've used a special chaining operator, %>%, which is part of the dplyr package. You can pull up the related documentation with ?chain. The benefit of %>% is that it allows us to chain the function calls in a linear fashion. The code to the right of %>% operates on the result from the code to the left of %>%.\n\nOnce again, just try to understand the code, then type submit() to continue."
   AnswerTests: script_results_identical('result3'); multi_expr_creates_var('result3')
-  Hint: If you accidentally changed something in the script, just undo your changes, save, then submit() again.
+  Hint: If you accidentally changed something in the script, just type reset() to undo your changes, then submit() again.
   Script: summarize4.R
 
 - Class: text
@@ -204,25 +204,25 @@
 - Class: script
   Output: Let's build a chain of dplyr commands one step at a time, starting with the script I just opened for you.
   AnswerTests: script_vals_identical()
-  Hint: This is a hint!
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: chain1.R
 
 - Class: script
   Output: Let's add to the chain.
   AnswerTests: script_vals_identical()
-  Hint: Here is a hint!
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: chain2.R
 
 - Class: script
   Output: A little bit more now.
   AnswerTests: script_vals_identical()
-  Hint: Here is a hint!
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: chain3.R
 
 - Class: script
   Output: And finish it off.
   AnswerTests: script_vals_identical()
-  Hint: Here is a hint!
+  Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: chain4.R
 
 
