@@ -25,21 +25,91 @@
   Output: Let's get going!
 
 - Class: cmd_question
-  Output: The today() function returns today's date. Give it a try, storing the result in a new variable called td (short for 'today').
-  CorrectAnswer: today()
-  AnswerTests: omnitest(correctExpr='today()')
-  Hint: Use today() to get today's date.
+  Output: The today() function returns today's date. Give it a try, storing the result in a new variable called this_day.
+  CorrectAnswer: this_day <- today()
+  AnswerTests: omnitest(correctExpr='this_day <- today()')
+  Hint: Use this_day <- today() to store today's date in a variable called this_day.
 
 - Class: cmd_question
-  Output: Print the contents of td to the console.
-  CorrectAnswer: td
-  AnswerTests: any_of_exprs('td', 'print(td)')
-  Hint: Type td to print its contents.
+  Output: Print the contents of this_day to the console.
+  CorrectAnswer: this_day
+  AnswerTests: any_of_exprs('this_day', 'print(this_day)')
+  Hint: Type this_day to print its contents.
 
 - Class: cmd_question
-  Output: There are three components to this date. In order, they are year, month, and day. We can extract any of these components using the year(), month(), or day() function respectively. Try any of those on td now.
-  CorrectAnswer: month(td)
-  AnswerTests: any_of_exprs('year(td)', 'month(td)', 'day(td)')
-  Hint: Try passing one argument, td, to year(), month(), or day().
+  Output: There are three components to this date. In order, they are year, month, and day. We can extract any of these components using the year(), month(), or day() function, respectively. Try any of those on this_day now.
+  CorrectAnswer: month(this_day)
+  AnswerTests: any_of_exprs('year(this_day)', 'month(this_day)', 'day(this_day)')
+  Hint: Try passing one argument, this_day, to year(), month(), or day().
+
+- Class: cmd_question
+  Output: We can also get the day of the week from this_day using the wday() function. It will be represented as a number, such that 1 = Sunday, 2 = Monday, 3 = Tuesday, etc.
+  CorrectAnswer: wday(this_day)
+  AnswerTests: omnitest('wday(this_day)')
+  Hint: wday(this_day) will give the day of the week, represented as a number.
+
+- Class: cmd_question
+  Output: "Now try the same thing again, except this time add a second argument, label = TRUE, to display the *name* of the weekday (represented as an ordered factor)."
+  CorrectAnswer: wday(this_day)
+  AnswerTests: omnitest('wday(this_day)')
+  Hint: wday(this_day) will give the day of the week, represented as a number.
+
+- Class: cmd_question
+  Output: In addition to handling dates, lubridate is great for working with date and time combinations, referred to as date-times. The now() function returns the date-time representing this exact moment in time. Give it a try and store the result in a variable called this_moment.
+  CorrectAnswer: this_moment <- now()
+  AnswerTests: omnitest('this_moment <- now()')
+  Hint: Store the result of now() in a new variable called this_moment.
+
+- Class: cmd_question
+  Output: View the contents of this_moment now.
+  CorrectAnswer: this_moment
+  AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
+  Hint: Type this_moment to print its contents to the console.
+
+- Class: cmd_question
+  Output: Just like with dates, we can extract the year, month, day, or day of week. However, we can also use hours(), minutes(), and seconds() to extract specific time information. Try any of these three new functions now to extract one piece of time information from this_moment.
+  CorrectAnswer: seconds(this_moment)
+  AnswerTests: any_of_exprs('hours(this_moment)', 'minutes(this_moment)', 'seconds(this_moment)')
+  Hint: Use hours(), minutes(), or seconds() to extract a single piece of time information from this_moment.
+
+- Class: text
+  Output: today() and now() provide neatly formatted date-time information. When working with dates 'in the wild', this won't always (and perhaps rarely will) be the case. Fortunately, lubridate makes it easy to read in date-times in just about any format you can imagine. Let's work through some examples.
+
+- Class: cmd_question
+  Output:
+  CorrectAnswer: seconds(this_moment)
+  AnswerTests: any_of_exprs('hours(this_moment)', 'minutes(this_moment)', 'seconds(this_moment)')
+  Hint: Use hours(), minutes(), or seconds() to extract a single piece of time information from this_moment.
+
+- Class: text
+  Output: "The update() function allows us to update one or more components of a date-time. For example, let's say the current time is 08:34:01 (hh:mm:ss). We could update this_moment to reflect the new time with the following command:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 01)."
+
+- Class: cmd_question
+  Output: Unless you're a superhero, some time has passed since you created this_moment. Use update() to make it match the current time. If you don't know the exact time, just set it to whatever you want. No need to save the result.
+  CorrectAnswer: update(this_moment, hours = 10, minutes = 6, seconds = 0)
+  AnswerTests: expr_uses_func('update')
+  Hint: Try update(this_moment, hours = 10, minutes = 6, seconds = 0), which will update the time to 10:06:00 (hh:mm:ss).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
