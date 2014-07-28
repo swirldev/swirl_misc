@@ -50,9 +50,9 @@
 
 - Class: cmd_question
   Output: "Now try the same thing again, except this time add a second argument, label = TRUE, to display the *name* of the weekday (represented as an ordered factor)."
-  CorrectAnswer: wday(this_day)
-  AnswerTests: omnitest('wday(this_day)')
-  Hint: wday(this_day) will give the day of the week, represented as a number.
+  CorrectAnswer: wday(this_day, label = TRUE)
+  AnswerTests: omnitest('wday(this_day, label = TRUE)')
+  Hint: wday(this_day, label = TRUE) will give you the day of the week, represented as a character string.
 
 - Class: cmd_question
   Output: In addition to handling dates, lubridate is great for working with date and time combinations, referred to as date-times. The now() function returns the date-time representing this exact moment in time. Give it a try and store the result in a variable called this_moment.
@@ -67,25 +67,88 @@
   Hint: Type this_moment to print its contents to the console.
 
 - Class: cmd_question
-  Output: Just like with dates, we can extract the year, month, day, or day of week. However, we can also use hours(), minutes(), and seconds() to extract specific time information. Try any of these three new functions now to extract one piece of time information from this_moment.
-  CorrectAnswer: seconds(this_moment)
-  AnswerTests: any_of_exprs('hours(this_moment)', 'minutes(this_moment)', 'seconds(this_moment)')
-  Hint: Use hours(), minutes(), or seconds() to extract a single piece of time information from this_moment.
+  Output: Just like with dates, we can extract the year, month, day, or day of week. However, we can also use hour(), minute(), and second() to extract specific time information. Try any of these three new functions now to extract one piece of time information from this_moment.
+  CorrectAnswer: second(this_moment)
+  AnswerTests: any_of_exprs('hour(this_moment)', 'minute(this_moment)', 'second(this_moment)')
+  Hint: Use hour(), minute(), or second() to extract a single piece of time information from this_moment.
 
 - Class: text
-  Output: today() and now() provide neatly formatted date-time information. When working with dates 'in the wild', this won't always (and perhaps rarely will) be the case. Fortunately, lubridate makes it easy to read in date-times in just about any format you can imagine. Let's work through some examples.
+  Output: today() and now() provide neatly formatted date-time information. When working with dates 'in the wild', this won't always (and perhaps rarely will) be the case.
+
+- Class: text
+  Output: Fortunately, lubridate offers a variety of functions for parsing date-times. These functions take the form of ymd(), dmy(), hms(), ymd_hms(), etc., where each letter in the name of the function stands for the location of years (y), months (m), days (d), hours (h), minutes (m), and/or seconds (s) in the date-time being read in.
 
 - Class: cmd_question
-  Output:
-  CorrectAnswer: seconds(this_moment)
-  AnswerTests: any_of_exprs('hours(this_moment)', 'minutes(this_moment)', 'seconds(this_moment)')
-  Hint: Use hours(), minutes(), or seconds() to extract a single piece of time information from this_moment.
+  Output: To see how these functions work, try ymd("1989-05-17").
+  CorrectAnswer: ymd("1989-05-17")
+  AnswerTests: omnitest('ymd("1989-05-17")')
+  Hint: Type ymd("1989-05-17") to see how ymd() works.
+
+- Class: cmd_question
+  Output: '"1989-05-17" is a fairly standard format, but lubridate is ''smart'' enough to figure out many different date-time formats. Use ymd() to parse "1989 May 17".'
+  CorrectAnswer: ymd("1989 May 17")
+  AnswerTests: omnitest('ymd("1989 May 17")')
+  Hint: Try ymd("1989 May 17") to see that ymd() is capable of handling different date-time formats.
+
+- Class: cmd_question
+  Output: Despite being formatted differently, the last two dates had the year first, then the month, then the day. Hence, we used ymd() to parse them. What do you think the appropriate function is for parsing "March 12, 1975"? Give it a try.
+  CorrectAnswer: mdy("March 12, 1975")
+  AnswerTests: any_of_exprs('mdy("March 12, 1975")', 'mdy("March 12, 1975")')
+  Hint: mdy() will correctly parse "March 12, 1975". The function name, mdy(), stands for year (y), month (m), and day (d), in order from left to right.
+
+- Class: cmd_question
+  Output: We can even throw something funky at it and lubridate will often know the right thing to do. Parse 25081985, which is supposed to represent the 25th day of August 1985. Note that we are actually parsing a numeric value here -- not a character string -- so leave off the quotes.
+  CorrectAnswer: dmy(25081985)
+  AnswerTests: omnitest('dmy(25081985)')
+  Hint: Use dmy() to parse 25081985 to see how lubridate handles something a little different from what we've seen so far.
+
+- Class: cmd_question
+  Output: But be careful, it's not magic. Try ymd("192012") to see what happens when we give it something more ambiguous.
+  CorrectAnswer: ymd("192012")
+  AnswerTests: omnitest('ymd("192012")')
+  Hint: Try ymd("192012") to see what happens when lubridate can't figure out what the format of the date is.
+
+- Class: cmd_question
+  Output: When in doubt, it''s best to be more explicit. Repeat the same command, but add two dashes OR forward slashes to "192012" so that it's clear we want January 2, 1920.
+  CorrectAnswer: ymd("1920/1/2")
+  AnswerTests: any_of_exprs('ymd("1920/1/2")', 'ymd("1920-1-2")')
+  Hint: ymd("1920/1/2") is more explicit than ymd("192012") and lubridate knows how to handle it.
+
+- Class: cmd_question
+  Output: In addition to dates, we can parse date-times. I've created a date-time called dt1. Take a look at it now.
+  CorrectAnswer: dt1
+  AnswerTests: any_of_exprs('dt1', 'print(dt1)')
+  Hint: Type dt1 to view its contents.
+
+- Class: cmd_question
+  Output: Now parse dt1 with ymd_hms().
+  CorrectAnswer: ymd_hms(dt1)
+  AnswerTests: omnitest('ymd_hms(dt1)')
+  Hint: ymd_hms(dt1) will parse dt1.
+
+- Class: cmd_question
+  Output: What if we have a time, but no date? Use the appropriate lubridate function to parse "03:22:14" (hours:minutes:seconds).
+  CorrectAnswer: hms("03:22:14")
+  AnswerTests: omnitest('hms("03:22:14")')
+  Hint: Give hms("03:22:14") a try. In this case, hms() stands for hours (h), minutes (m), and seconds (s).
+
+- Class: cmd_question
+  Output: lubridate is also capable of handling vectors of dates, which is particularly helpful when you need to parse an entire column of your dataset. I've created a vector of dates called dt2. View its contents now.
+  CorrectAnswer: dt2
+  AnswerTests: any_of_exprs('dt2', 'print(dt2)')
+  Hint: Type dt2 to view its contents.
+
+- Class: cmd_question
+  Output: Now parse dt2 using the appropriate lubridate function.
+  CorrectAnswer: ymd
+  AnswerTests: any_of_exprs('dt2', 'print(dt2)')
+  Hint: Type dt2 to view its contents.
 
 - Class: text
   Output: "The update() function allows us to update one or more components of a date-time. For example, let's say the current time is 08:34:01 (hh:mm:ss). We could update this_moment to reflect the new time with the following command:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 01)."
 
 - Class: cmd_question
-  Output: Unless you're a superhero, some time has passed since you created this_moment. Use update() to make it match the current time. If you don't know the exact time, just set it to whatever you want. No need to save the result.
+  Output: Unless you're a superhero, some time has passed since you created this_moment. Use update() to make it match the current time. If you don't know the exact time, try changing the time to 10:06:00. No need to save the result.
   CorrectAnswer: update(this_moment, hours = 10, minutes = 6, seconds = 0)
   AnswerTests: expr_uses_func('update')
   Hint: Try update(this_moment, hours = 10, minutes = 6, seconds = 0), which will update the time to 10:06:00 (hh:mm:ss).
