@@ -61,7 +61,7 @@
   Hint: Store the result of now() in a new variable called this_moment.
 
 - Class: cmd_question
-  Output: View the contents of this_moment now.
+  Output: View the contents of this_moment.
   CorrectAnswer: this_moment
   AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
   Hint: Type this_moment to print its contents to the console.
@@ -73,7 +73,7 @@
   Hint: Use hour(), minute(), or second() to extract a single piece of time information from this_moment.
 
 - Class: text
-  Output: today() and now() provide neatly formatted date-time information. When working with dates 'in the wild', this won't always (and perhaps rarely will) be the case.
+  Output: today() and now() provide neatly formatted date-time information. When working with dates and times 'in the wild', this won't always (and perhaps rarely will) be the case.
 
 - Class: text
   Output: Fortunately, lubridate offers a variety of functions for parsing date-times. These functions take the form of ymd(), dmy(), hms(), ymd_hms(), etc., where each letter in the name of the function stands for the location of years (y), months (m), days (d), hours (h), minutes (m), and/or seconds (s) in the date-time being read in.
@@ -91,7 +91,7 @@
   Hint: Type my_date to view its contents.
 
 - Class: cmd_question
-  Output: It looks almost the same, except for the addition of a time zone. We'll discuss time zones later in the lesson. Below the surface, there's another important change that takes place when lubridate parses a date. Type class(my_date) to see what that is.
+  Output: It looks almost the same, except for the addition of a time zone, which we'll discuss later in the lesson. Below the surface, there's another important change that takes place when lubridate parses a date. Type class(my_date) to see what that is.
   CorrectAnswer: class(my_date)
   AnswerTests: omnitest('class(my_date)')
   Hint: Type class(my_date) to see what important change takes place when lubridate parses a date.
@@ -100,7 +100,7 @@
   Output: So ymd() took a character string as input and returned an object of class POSIXct. It's not necessary that you understand what POSIXct is, but just know that it is one way that R stores date-time information internally.
 
 - Class: cmd_question
-  Output: '"1989-05-17" is a fairly standard format, but lubridate is ''smart'' enough to figure out many different date-time formats. Use ymd() to parse "1989 May 17".'
+  Output: '"1989-05-17" is a fairly standard format, but lubridate is ''smart'' enough to figure out many different date-time formats. Use ymd() to parse "1989 May 17". Don''t forget to put quotes around the date!'
   CorrectAnswer: ymd("1989 May 17")
   AnswerTests: omnitest('ymd("1989 May 17")')
   Hint: Try ymd("1989 May 17") to see that ymd() is capable of handling different date-time formats.
@@ -115,7 +115,7 @@
   Output: We can even throw something funky at it and lubridate will often know the right thing to do. Parse 25081985, which is supposed to represent the 25th day of August 1985. Note that we are actually parsing a numeric value here -- not a character string -- so leave off the quotes.
   CorrectAnswer: dmy(25081985)
   AnswerTests: omnitest('dmy(25081985)')
-  Hint: Use dmy() to parse 25081985 to see how lubridate handles something a little different from what we've seen so far.
+  Hint: Use dmy(25081985) to see how lubridate handles something a little different from what we've seen so far.
 
 - Class: cmd_question
   Output: But be careful, it's not magic. Try ymd("192012") to see what happens when we give it something more ambiguous. Surround the number with quotes again, just to be consistent with the way most dates are represented (as character strings).
@@ -142,7 +142,7 @@
   Hint: ymd_hms(dt1) will parse dt1.
 
 - Class: cmd_question
-  Output: What if we have a time, but no date? Use the appropriate lubridate function to parse "03:22:14" (hours:minutes:seconds).
+  Output: What if we have a time, but no date? Use the appropriate lubridate function to parse "03:22:14" (hh:mm:ss).
   CorrectAnswer: hms("03:22:14")
   AnswerTests: omnitest('hms("03:22:14")')
   Hint: Give hms("03:22:14") a try. In this case, hms() stands for hours (h), minutes (m), and seconds (s).
@@ -159,13 +159,16 @@
   AnswerTests: omnitest('ymd(dt2)')
   Hint: Use ymd(dt2) to parse the vector of dates named dt2.
 
-- Class: text
-  Output: "The update() function allows us to update one or more components of a date-time. For example, let's say the current time is 08:34:01 (hh:mm:ss). Update this_moment to the new time using the following command:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 01)."
+- Class: cmd_question
+  Output: "The update() function allows us to update one or more components of a date-time. For example, let's say the current time is 08:34:55 (hh:mm:ss). Update this_moment to the new time using the following command:\n\nupdate(this_moment, hours = 8, minutes = 34, seconds = 55)."
+  CorrectAnswer: update(this_moment, hours = 8, minutes = 34, seconds = 55)
+  AnswerTests: omnitest('update(this_moment, hours = 8, minutes = 34, seconds = 55)')
+  Hint: update(this_moment, hours = 8, minutes = 34, seconds = 55) will update this_moment to reflect a new time of 08:34:55.
 
 - Class: cmd_question
   Output: Unless you're a superhero, some time has passed since you created this_moment. Use update() to make it match the current time. If you don't know the exact time, try changing the time to 10:06:00. No need to save the result.
   CorrectAnswer: update(this_moment, hours = 10, minutes = 6, seconds = 0)
-  AnswerTests: expr_uses_func('update')
+  AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes', 'seconds')
   Hint: Try update(this_moment, hours = 10, minutes = 6, seconds = 0), which will update the time to 10:06:00 (hh:mm:ss).
 
 
