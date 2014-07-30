@@ -166,16 +166,52 @@
   Hint: update(this_moment, hours = 8, minutes = 34, seconds = 55) will update this_moment to reflect a new time of 08:34:55.
 
 - Class: cmd_question
-  Output: Unless you're a superhero, some time has passed since you created this_moment. Use update() to make it match the current time. If you don't know the exact time, try changing the time to 10:06:00. No need to save the result.
-  CorrectAnswer: update(this_moment, hours = 10, minutes = 6, seconds = 0)
-  AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes', 'seconds')
-  Hint: Try update(this_moment, hours = 10, minutes = 6, seconds = 0), which will update the time to 10:06:00 (hh:mm:ss).
+  Output: It's important to recognize that the previous command does not alter this_moment unless we reassign the result to this_moment. To see this, print the contents of this_moment.
+  CorrectAnswer: this_moment
+  AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
+  Hint: Type this_moment to view its contents.
 
+- Class: cmd_question
+  Output: Unless you're a superhero, some time has passed since you first created this_moment. Use update() to make it match the current time, specifying at least hours and minutes. Assign the result to this_moment, so that this_moment will contain the new time.
+  CorrectAnswer: this_moment <- update(this_moment, hours = 10, minutes = 16, seconds = 0)
+  AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes')
+  Hint: Try update(this_moment, hours = 10, minutes = 16, seconds = 0), which will update the time to 10:16:00.
 
+- Class: cmd_question
+  Output: Take one more look at this_moment to see that it's been updated.
+  CorrectAnswer: this_moment
+  AnswerTests: any_of_exprs('this_moment', 'print(this_moment)')
+  Hint: Type this_moment to see its new value.
 
+- Class: text
+  Output: Now, pretend you are in New York City and you are planning to visit a friend in Hong Kong. You seem to have misplaced your itinerary, but you know that your flight departs New York at 5:34pm the day after tomorrow. You also know that your flight is scheduled to arrive in Hong Kong exactly 15 hours and 50 minutes after departure.
 
+- Class: text
+  Output: Let's reconstruct your itinerary from what you can remember, starting with the full date and time of your departure. We will approach this by 'rounding' this_moment down to the nearest date, adding 2 full days, then setting the time to 5:34pm.
 
+- Class: cmd_question
+  Output: The floor_date() function will help us with the first step of 'rounding' down to the nearest day. Type ?floor_date to pull up the documentation for floor_date().
+  CorrectAnswer: ?floor_date
+  AnswerTests: any_of_exprs('?floor_date', 'help(floor_date)')
+  Hint: Type ?floor_date to bring up the help file.
 
+- Class: cmd_question
+  Output: Use floor_date() to round this_moment down to the nearest day. Assign the result to a new variable called 'depart'.
+  CorrectAnswer: depart <- floor_date(this_moment, "day")
+  AnswerTests: match_call('depart <- floor_date(this_moment, "day")')
+  Hint: depart <- floor_date(this_moment, "day") will round this_moment down to the nearest day and assign the result.
+
+- Class: cmd_question
+  Output: Print the contents of depart, which will eventually store the full time and date of your departure. Although it is not displayed, the time has been been rounded down to 00:00:00.
+  CorrectAnswer: this_moment
+  AnswerTests: any_of_exprs('depart', 'print(depart)')
+  Hint: Type this_moment to see its new value.
+
+- Class: cmd_question
+  Output: "Add two days to 'depart' and reassign the result with the following command:\n\ndepart <- depart + days(2)"
+  CorrectAnswer: depart <- depart + days(2)
+  AnswerTests: omnitest('depart <- depart + days(2)')
+  Hint: Type depart <- depart + days(2) to add two days to 'depart'.
 
 
 
