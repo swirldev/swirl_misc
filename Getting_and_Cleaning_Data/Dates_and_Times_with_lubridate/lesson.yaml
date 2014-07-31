@@ -258,7 +258,26 @@
   AnswerTests: any_of_exprs('arrive', 'print(arrive)')
   Hint: Type arrive to view its contents.
 
+- Class: text
+  Output: Fast forward to your arrival in Hong Kong. You and your friend have just met at the airport and you realize that the last time you were together was in Singapore on June 17, 2008. Naturally, you'd like to know exactly how long it has been.
 
+- Class: cmd_question
+  Output: Use the appropriate lubridate function to parse "June 17, 2008", just like you did near the beginning of this lesson. This time, however, you should specify an extra argument, tz = "Singapore". Store the result in a variable called last_time.
+  CorrectAnswer: last_time <- mdy("June 17, 2008", tz = "Singapore")
+  AnswerTests: omnitest('last_time <- mdy("June 17, 2008", tz = "Singapore")')
+  Hint: Use mdy("June 17, 2008", tz = "Singapore") to parse the date with the correct time zone and store the result in last_time.
+
+- Class: cmd_question
+  Output: View the contents of last_time.
+  CorrectAnswer: last_time
+  AnswerTests: any_of_exprs('last_time', 'print(last_time)')
+  Hint: Type last_time to view its contents.
+
+- Class: cmd_question
+  Output: Pull up the documentation for interval(), which we'll use to explore how much time has passed between arrive and last_time.
+  CorrectAnswer: ?interval
+  AnswerTests: any_of_exprs('?interval', 'help(interval)')
+  Hint: Type ?interval to bring up the help file.
 
 
 
