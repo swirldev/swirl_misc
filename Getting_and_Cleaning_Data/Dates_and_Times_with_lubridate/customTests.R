@@ -76,3 +76,19 @@ test_arrive_val <- function() {
   # Compare
   identical(user_val, correct_val)
 }
+
+start_timer <- function() {
+  e <- get('e', parent.frame())
+  e$`__lesson_start_time` <- now()
+  TRUE
+}
+
+stop_timer <- function() {
+  e <- get('e', parent.frame())
+  if(deparse(e$expr) == "stopwatch()") {
+    start_time <- e$`__lesson_start_time`
+    stop_time <- now()
+    print(as.period(new_interval(start_time, stop_time)))
+  }
+  TRUE
+}

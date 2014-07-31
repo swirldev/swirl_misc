@@ -12,7 +12,7 @@
 - Class: cmd_question
   Output: lubridate should have been automatically installed (if necessary) and loaded upon starting this lesson. To build the habit, we'll go ahead and (re)load the package now. Type library(lubridate) to do so.
   CorrectAnswer: library(lubridate)
-  AnswerTests: omnitest(correctExpr='library(lubridate)')
+  AnswerTests: start_timer(); omnitest(correctExpr='library(lubridate)')
   Hint: Type library(lubridate) to (re)load the package.
 
 - Class: cmd_question
@@ -274,19 +274,34 @@
   Hint: Type last_time to view its contents.
 
 - Class: cmd_question
-  Output: Pull up the documentation for interval(), which we'll use to explore how much time has passed between arrive and last_time.
-  CorrectAnswer: ?interval
-  AnswerTests: any_of_exprs('?interval', 'help(interval)')
-  Hint: Type ?interval to bring up the help file.
+  Output: Pull up the documentation for new_interval(), which we'll use to explore how much time has passed between arrive and last_time.
+  CorrectAnswer: ?new_interval
+  AnswerTests: any_of_exprs('?new_interval', 'help(new_interval)')
+  Hint: Type ?new_interval to bring up the help file.
 
+- Class: cmd_question
+  Output: Create a new_interval() that spans from last_time to arrive. Store it in a new variable called how_long.
+  CorrectAnswer: how_long <- new_interval(last_time, arrive)
+  AnswerTests: match_call('how_long <- new_interval(last_time, arrive)')
+  Hint: Call new_interval with two arguments, last_time and arrive, and store the result in how_long.
 
+- Class: cmd_question
+  Output: Now use as.period(how_long) to see how long it's been.
+  CorrectAnswer: as.period(how_long)
+  AnswerTests: omnitest('as.period(how_long)')
+  Hint: as.period(how_long) will tell you how many years, months, days, etc. have passed since you last saw your friend.
 
+- Class: text
+  Output: This is where things get a little tricky. Because of things like leap years, leap seconds, and daylight savings time, the length of any given minute, day, month, week, or year is relative to when it occurs. In contrast, the length of a second is always the same, regardless of when it occurs.
 
+- Class: text
+  Output: "To address these complexities, the authors of lubridate introduce four classes of time related objects: instants, intervals, durations, and periods. These topics are beyond the scope of this lesson, but you can find a complete discussion in the 2011 Journal of Statistical Software paper titled 'Dates and Times Made Easy with lubridate'."
 
-
-
-
-
+- Class: cmd_question
+  Output: This concludes our introduction to working with dates and times in lubridate. I created a little timer that started running in the background when you began this lesson. Type stopwatch() to see how long you've been working!
+  CorrectAnswer: stopwatch()
+  AnswerTests: omnitest('stopwatch()'); stop_timer()
+  Hint: Type stopwatch() to see how long you've been working!
 
 
 
