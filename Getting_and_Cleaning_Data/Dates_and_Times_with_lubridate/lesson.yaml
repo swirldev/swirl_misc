@@ -195,6 +195,9 @@
   AnswerTests: match_call('nyc <- now("America/New_York")')
   Hint: now("America/New_York") will give the current date in New York. Store the result in a variable called nyc.
 
+- Class: text
+  Output: "For a complete list of valid time zones for use with lubridate, check out the following Wikipedia page: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+
 - Class: cmd_question
   Output: View the contents of nyc.
   CorrectAnswer: nyc
@@ -224,6 +227,37 @@
   CorrectAnswer: depart
   AnswerTests: any_of_exprs('depart', 'print(depart)')
   Hint: Type depart to view its contents.
+
+- Class: text
+  Output: Your friend wants to know what time she should pick you up from the airport in Hong Kong. Now that we have the exact date and time of your departure from New York, we can figure out the exact time of your arrival in Hong Kong.
+
+- Class: cmd_question
+  Output: The first step is to add 15 hours and 50 minutes to your departure time. Recall that nyc + days(2) added two days to the current time in New York. Use the same approach to add 15 hours and 50 minutes to the date-time stored in depart. Store the result in a new variable called arrive.
+  CorrectAnswer: arrive <- depart + hours(15) + minutes(50)
+  AnswerTests: expr_creates_var('arrive'); test_arrive_val()
+  Hint: arrive <- depart + hours(15) + minutes(50) will add 15 hours and 50 minutes to depart and store the result in arrive.
+
+- Class: text
+  Output: The arrive variable contains the time that it will be in New York when you arrive in Hong Kong. What we really want to know is what time is will be in Hong Kong when you arrive, so that your friend knows when to meet you.
+
+- Class: cmd_question
+  Output: The with_tz() function returns a date-time as it would appear in another time zone. Use ?with_tz to check out the documentation.
+  CorrectAnswer: ?with_tz
+  AnswerTests: any_of_exprs('?with_tz', 'help(with_tz)')
+  Hint: View the help file using ?with_tz.
+
+- Class: cmd_question
+  Output: Use with_tz() to convert arrive to the "Asia/Hong_Kong" time zone. Reassign the result to arrive, so that it will get the new value.
+  CorrectAnswer: arrive <- with_tz(arrive, "Asia/Hong_Kong")
+  AnswerTests: match_call('arrive <- with_tz(arrive, "Asia/Hong_Kong")')
+  Hint: with_tz(arrive, "Asia/Hong_Kong") will convert arrive to Hong Kong time. Assign the result back to arrive.
+
+- Class: cmd_question
+  Output: Print the value of arrive to the console, so that you can tell your friend what time to pick you up from the airport.
+  CorrectAnswer: arrive
+  AnswerTests: any_of_exprs('arrive', 'print(arrive)')
+  Hint: Type arrive to view its contents.
+
 
 
 

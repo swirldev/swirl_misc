@@ -65,3 +65,14 @@ expand_call <- function(call_string) {
   # Return expanded function call
   qcall
 }
+
+test_arrive_val <- function() {
+  # Get user's value
+  e <- get('e', parent.frame())
+  user_val <- e$val
+  # Get correct value
+  depart <- get('depart', globalenv())
+  correct_val <- depart + hours(15) + minutes(50)
+  # Compare
+  identical(user_val, correct_val)
+}
