@@ -184,36 +184,46 @@
   Hint: Type this_moment to see its new value.
 
 - Class: text
-  Output: Now, pretend you are in New York City and you are planning to visit a friend in Hong Kong. You seem to have misplaced your itinerary, but you know that your flight departs New York at 5:34pm the day after tomorrow. You also know that your flight is scheduled to arrive in Hong Kong exactly 15 hours and 50 minutes after departure.
+  Output: Now, pretend you are in New York City and you are planning to visit a friend in Hong Kong. You seem to have misplaced your itinerary, but you know that your flight departs New York at 17:34 (5:34pm) the day after tomorrow. You also know that your flight is scheduled to arrive in Hong Kong exactly 15 hours and 50 minutes after departure.
 
 - Class: text
-  Output: Let's reconstruct your itinerary from what you can remember, starting with the full date and time of your departure. We will approach this by 'rounding' this_moment down to the nearest date, adding 2 full days, then setting the time to 5:34pm.
+  Output: Let's reconstruct your itinerary from what you can remember, starting with the full date and time of your departure. We will approach this by finding the current date in New York, adding 2 full days, then setting the time to 17:34.
 
 - Class: cmd_question
-  Output: The floor_date() function will help us with the first step of 'rounding' down to the nearest day. Type ?floor_date to pull up the documentation for floor_date().
-  CorrectAnswer: ?floor_date
-  AnswerTests: any_of_exprs('?floor_date', 'help(floor_date)')
-  Hint: Type ?floor_date to bring up the help file.
+  Output: 'To find the current date in New York, we''ll use the now() function again. This time, however, we''ll specify the time zone that we want: "America/New_York". Store the result in a variable called nyc. Check out ?now if you need help.'
+  CorrectAnswer: nyc <- now("America/New_York")
+  AnswerTests: match_call('nyc <- now("America/New_York")')
+  Hint: now("America/New_York") will give the current date in New York. Store the result in a variable called nyc.
 
 - Class: cmd_question
-  Output: Use floor_date() to round this_moment down to the nearest day. Assign the result to a new variable called 'depart'.
-  CorrectAnswer: depart <- floor_date(this_moment, "day")
-  AnswerTests: match_call('depart <- floor_date(this_moment, "day")')
-  Hint: depart <- floor_date(this_moment, "day") will round this_moment down to the nearest day and assign the result.
+  Output: View the contents of nyc.
+  CorrectAnswer: nyc
+  AnswerTests: any_of_exprs('nyc', 'print(nyc)')
+  Hint: Type nyc to see the current date in New York.
 
 - Class: cmd_question
-  Output: Print the contents of depart, which will eventually store the full time and date of your departure. Although it is not displayed, the time has been been rounded down to 00:00:00.
-  CorrectAnswer: this_moment
+  Output: "Your flight is the day after tomorrow (in New York time), so we want to add two days to nyc. One nice aspect of lubridate is that it allows you to use arithmetic operators on dates and times. In this case, we'd like to add two days to nyc, so we can use the following expression: nyc + days(2). Give it a try, storing the result in a variable called depart."
+  CorrectAnswer: depart <- nyc + days(2)
+  AnswerTests: any_of_exprs('depart <- nyc + days(2)', 'depart <- days(2) + nyc')
+  Hint: Use nyc + days(2) to add two days to the current date in New York. Store the result in a variable called depart.
+
+- Class: cmd_question
+  Output: Take a look at depart.
+  CorrectAnswer: depart
   AnswerTests: any_of_exprs('depart', 'print(depart)')
-  Hint: Type this_moment to see its new value.
+  Hint: Type depart to view its contents.
 
 - Class: cmd_question
-  Output: "Add two days to 'depart' and reassign the result with the following command:\n\ndepart <- depart + days(2)"
-  CorrectAnswer: depart <- depart + days(2)
-  AnswerTests: omnitest('depart <- depart + days(2)')
-  Hint: Type depart <- depart + days(2) to add two days to 'depart'.
+  Output: So now depart contains the date of the day after tomorrow. Use update() to add the correct hours (17) and minutes (34) to depart. Reassign the result to depart.
+  CorrectAnswer: depart <- update(depart, hours = 17, minutes = 34)
+  AnswerTests: any_of_exprs('depart <- update(depart, hours = 17, minutes = 34)', 'depart <- update(depart, minutes = 34, hours = 17)')
+  Hint: Use depart <- update(depart, hours = 17, minutes = 34) to update depart with the correct time of 17:34.
 
-
+- Class: cmd_question
+  Output: Take one more look at depart.
+  CorrectAnswer: depart
+  AnswerTests: any_of_exprs('depart', 'print(depart)')
+  Hint: Type depart to view its contents.
 
 
 

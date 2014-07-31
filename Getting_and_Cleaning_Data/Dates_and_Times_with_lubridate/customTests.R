@@ -4,6 +4,8 @@ func_uses_args <- function(...) {
   expr <- e$expr
   # Capture names of correct args
   correct_args <- list(...)
+  # If expr is assignment, just get the rhs
+  if(is(expr, "<-")) expr <- expr[[3]]
   # Check for the presence of each correct arg in the expr names
   match_found <- try(sapply(correct_args, function(arg) arg %in% names(expr)))
   # If something is weird, return FALSE
@@ -22,7 +24,9 @@ match_call <- function(correct_call = NULL) {
   full_correct_call <- expand_call(correct_call)
   # Expand user's expression
   expr <- deparse(e$expr)
-  full_user_expr <- expand_call(expr)
+  full_user_expr <- try(expand_call(expr), silent = TRUE)
+  # Check if expansion went okay
+  if(is(full_user_expr, "try-error")) return(FALSE)
   # Compare function calls with full arg names
   identical(full_correct_call, full_user_expr)
 }
