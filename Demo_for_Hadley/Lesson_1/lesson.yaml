@@ -1,0 +1,45 @@
+- Class: meta
+  Course: Demo for Hadley
+  Lesson: Lesson 1
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: swirl
+  Version: 2.2.14
+
+- Class: text
+  Output: In this lesson, you'll learn how to seamlessly combine dplyr and ggvis to manipulate data and create interactive plots.
+
+- Class: text
+  Output: We'll be using data from the nycflights13 package, which was installed (if necessary) and loaded at the start of this lesson.
+
+- Class: cmd_question
+  Output: The 'flights' dataset contains information on all flights that departed NYC in 2013. It has already been placed in a tbl_df for you. Type flights to preview it.
+  CorrectAnswer: flights
+  AnswerTests: any_of_exprs('flights', 'print(flights)')
+  Hint: Type flights to preview the data.
+
+- Class: cmd_question
+  Output: The 'weather' dataset contains hourly meteorological data from the same three airports cataloged in the flights data. This data has also been placed in a tbl_df. Type weather to preview it.
+  CorrectAnswer: weather
+  AnswerTests: any_of_exprs('weather', 'print(weather)')
+  Hint: Type weather to preview the data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
