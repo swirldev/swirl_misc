@@ -7,7 +7,7 @@
   Version: 2.2.14
 
 - Class: text
-  Output: In this lesson, you'll learn how to seamlessly combine dplyr and ggvis to manipulate data and create interactive plots.
+  Output: In this lesson, you'll learn how to seamlessly combine dplyr and ggvis to manipulate data and create interactive plots. I'll assume you have some experience with dplyr's basic data manipulation verbs and the %>% operator for chaining commands together.
 
 - Class: text
   Output: We'll be using data from the nycflights13 package, which was installed (if necessary) and loaded at the start of this lesson.
@@ -24,16 +24,17 @@
   AnswerTests: any_of_exprs('weather', 'print(weather)')
   Hint: Type weather to preview the data.
 
+- Class: script
+  Output: Our first step is to summarize the flights data. I've opened an R script, where you'll find further instructions. You can play around in the console as much as you want, then type submit() when you are ready to proceed. If you get stuck, type reset() to start with a fresh script.
+  AnswerTests: script_results_identical('daily')
+  Hint: Read the directions in the script carefully. If R gave you an error, try to understand what it is telling you. Remember that if you get stuck, you can type reset() to start over.
+  Script: script1.R
 
-
-
-
-
-
-
-
-
-
+- Class: script
+  Output: Next, we need to summarize the weather data. I've opened another script for you. Mess around in the console as much as you please, then type submit() when you are done, or type reset() to start over.
+  AnswerTests: script_results_identical('daily_weather')
+  Hint: Read the directions in the script carefully. If R gave you an error, try to understand what it is telling you. Remember that if you get stuck, you can type reset() to start over.
+  Script: script2.R
 
 
 
