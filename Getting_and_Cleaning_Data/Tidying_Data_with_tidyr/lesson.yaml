@@ -9,6 +9,12 @@
 - Class: text
   Output: In this lesson, you'll learn how to tidy your data with the tidyr package.
 
+- Class: cmd_question
+  Output: tidyr was automatically installed (if necessary) and loaded when you started this lesson. Just to build the habit, (re)load the package with library(tidyr).
+  CorrectAnswer: library(tidyr)
+  AnswerTests: omnitest('library(tidyr)')
+  Hint: Type library(tidyr) to (re)load the tidyr package.
+
 - Class: text
   Output: "The author of tidyr, Hadley Wickham, discusses his philosophy of tidy data in his 'Tidy Data' paper:\n\nhttp://vita.had.co.nz/papers/tidy-data.pdf\n\nThis paper should be required reading for anyone who works with data, but it's not required in order to complete this lesson."
 
@@ -23,7 +29,47 @@
   Hint: Scroll up to review the three characteristics of tidy data. Any dataset that violates at least one of these is considered messy. Therefore, all of the following are characteristics of messy data, EXCEPT...
 
 - Class: text
-  Output: The previous question gives the most common causes of messy datasets. Let's work through a trivial example of each of these cases, then tidy a couple of real datasets.
+  Output: The previous question gives the most common symptoms of messy data. Let's work through a simple example of each of these five cases, then tidy some real data.
+
+- Class: cmd_question
+  Output: The first problem is when you have column headers that are values, not variable names. I've created a simple dataset called 'students' that demonstrates this scenario. Type students to take a look.
+  CorrectAnswer: students
+  AnswerTests: prints_var('students')
+  Hint: Type students to view the data.
+
+- Class: text
+  Output: The first column, grade, represents each of five possible grades that students could receive for a particular class. The second and third columns, give the number of male and female students, respectively, that received each grade.
+
+- Class: text
+  Output: "This dataset actually has three variables: grade, sex, and count. The first variable, grade, is already a column, so that should remain as it is. The second variable, sex, is captured by the second and third column headings. The third variable, count, is the number of students for each combination of grade and sex."
+
+- Class: cmd_question
+  Output: To tidy the students data, we need to have one column for each of these three variables. We'll use the gather() function from tidyr to accomplish this. Pull up the documentation for this function with ?gather.
+  CorrectAnswer: ?gather
+  AnswerTests: any_of_exprs('?gather', 'help(gather)')
+  Hint: Use ?gather to pull up the documentation.
+
+- Class: cmd_question
+  Output: "Using the help file as a guide, call gather() with the following arguments (in order): students, sex, count, -grade."
+  CorrectAnswer: gather(students, sex, count, -grade)
+  AnswerTests: match_call('gather(students, sex, count, -grade)')
+  Hint: "gather(students, sex, count, -grade) will properly tidy the students data, so that it has three columns: grade, sex, and count."
+
+- Class: text
+  Output: Each row of the data now represents exactly one observation, characterized by a unique combination of the grade and sex variables. Each of our variables (grade, sex, and count) occupies exactly one column. That's tidy data!
+
+- Class: text
+  Output: It's important to understand what each argument to gather() means. The data argument, students, gives the name of the original dataset. The key and value arguments -- sex and count, respectively -- give the column names for our tidy dataset. The final argument, -grade, says that we want to gather all columns EXCEPT the grade column (since grade is already a proper column variable.)
+
+- Class: cmd_question
+  Output: The second messy data case we'll look at is when multiple variables are stored in one column. Type students2 to see an example of this.
+  CorrectAnswer: students2
+  AnswerTests: prints_var('students2')
+  Hint: Type students2 to view the data.
+
+
+
+
 
 
 
