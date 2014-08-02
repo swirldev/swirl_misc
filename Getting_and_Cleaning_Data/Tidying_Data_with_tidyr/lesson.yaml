@@ -5,3 +5,28 @@
   Type: Standard
   Organization: JHU Biostat
   Version: 2.2.14
+
+- Class: text
+  Output: In this lesson, you'll learn how to tidy your data with the tidyr package.
+
+- Class: text
+  Output: "The author of tidyr, Hadley Wickham, discusses his philosophy of tidy data in his 'Tidy Data' paper:\n\nhttp://vita.had.co.nz/papers/tidy-data.pdf\n\nThis paper should be required reading for anyone who works with data, but it's not required in order to complete this lesson."
+
+- Class: text
+  Output: "Tidy data is formatted in a standard way that facilitates exploration and analysis and works seemlessly with other tidy data tools. Specifically, tidy data satisfies three conditions:\n\n1) Each variable forms a column\n\n2) Each observation forms a row\n\n3) Each type of observational unit forms a table"
+
+- Class: mult_question
+  Output: Any dataset that doesn't satisfy these conditions is considered 'messy' data. Therefore, all of the following are characteristics of messy data, EXCEPT...
+  AnswerChoices: Every column contains a different variable; Column headers are values, not variable names; Multiple variables are stored in one column; Variables are stored in both rows and columns; Multiple types of observational units are stored in the same table; A single observational unit is stored in multiple tables
+  CorrectAnswer: Every column contains a different variable
+  AnswerTests: omnitest(correctVal= 'Every column contains a different variable')
+  Hint: Scroll up to review the three characteristics of tidy data. Any dataset that violates at least one of these is considered messy. Therefore, all of the following are characteristics of messy data, EXCEPT...
+
+- Class: text
+  Output: The previous question gives the most common causes of messy datasets. Let's work through a trivial example of each of these cases, then tidy a couple of real datasets.
+
+
+
+
+
+

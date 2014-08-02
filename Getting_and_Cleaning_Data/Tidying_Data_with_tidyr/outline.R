@@ -6,10 +6,28 @@
 # spread_	Standard-evaluation version of 'spread'.
 # unite	Unite multiple columns into one.
 
-library(dplyr)
 library(tidyr)
+library(dplyr)
 
-sat <- tbl_df(read.csv('Getting_and_Cleaning_Data/Tidying_Data_with_tidyr/sat13'))
+# column headers are values, not variable names
+
+?gather
+gather(students, sex, count, -grade)
+
+# multiple variables are stored in one column
+
+
+# variables are stored in both rows and columns
+
+
+# multiple types of observational units are stored in the same table
+
+
+# a single observational unit is stored in multiple tables
+
+
+# real data examples
+
 sat1 <- select(sat, -contains("total"))
 sat1 <- gather(sat1, column, count, -score_range)
 sat1 <- separate(sat1, column, c("part", "sex"))

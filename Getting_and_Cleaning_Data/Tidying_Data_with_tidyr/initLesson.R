@@ -1,4 +1,70 @@
-# Code placed in this file fill be executed every time the
-# lesson is started. Any variables created here will show up in
-# the user's working directory and thus be accessible to them
-# throughout the lesson.
+# number of letter grades (A - E)
+ng <- 5
+# max number of students/group
+gmax <- 8
+
+# column headers are values, not variable names
+
+set.seed(1234)
+students <- data.frame(
+  grade = LETTERS[1:ng],
+  male = sample(0:gmax, ng, replace = TRUE),
+  female = sample(0:gmax, ng, replace = TRUE)
+)
+
+# multiple variables are stored in one column
+
+set.seed(1211)
+students2 <- data.frame(
+  grade = LETTERS[1:ng],
+  male_1 = sample(0:gmax, ng, replace = TRUE),
+  female_1 = sample(0:gmax, ng, replace = TRUE),
+  male_2 = sample(0:gmax, ng, replace = TRUE),
+  female_2 = sample(0:gmax, ng, replace = TRUE)
+)
+
+# variables are stored in both rows and columns
+
+set.seed(67)
+students3 <- data.frame(
+  grade = rep(LETTERS[1:ng], each = 2),
+  pm = rep(c("+", "-"), ng),
+  male = sample(0:gmax, ng * 2, replace = TRUE),
+  female = sample(0:gmax, ng * 2, replace = TRUE)
+)
+
+# multiple types of observational units are stored in the same table
+
+set.seed(23442)
+students4 <- data.frame(
+  id = rep(sample(101:999, 5), each = 2),
+  name = rep(c("Sally", "Jeff", "Roger", "Karen", "Brian"), each = 2),
+  sex = rep(c("F", "M", "M", "F", "M"), each = 2),
+  class = rep(c(1, 2), 5),
+  grade = sample(LETTERS[1:ng], 10, replace = TRUE)
+)
+
+# a single observational unit is stored in multiple tables
+
+library(dplyr)
+class1 <- students4 %>%
+  select(id, class, grade) %>%
+  filter(class == 1)
+class2 <- students4 %>%
+  select(id, class, grade) %>%
+  filter(class == 2)
+
+
+# real data examples
+
+.path2sat <- file.path(path.package('swirl'), 'Courses',
+                      'Getting_and_Cleaning_Data', 'Tidying_Data_with_tidyr',
+                      'sat13.csv')
+sat <- tbl_df(read.csv(.path2sat))
+
+
+
+
+
+
+
