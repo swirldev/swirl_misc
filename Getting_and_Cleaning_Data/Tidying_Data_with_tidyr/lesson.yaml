@@ -75,8 +75,8 @@
 
 - Class: cmd_question
   Output: Let's start by using gather() to stack the columns of students2, like we just did with students. This time, name the 'key' column sex_class and the 'value' column count. Save the result to a new variable called res. Consult ?gather again if you need help.
-  CorrectAnswer: gather(students2, sex_class, count, -grade)
-  AnswerTests: match_call('gather(students2, sex_class, count, -grade)')
+  CorrectAnswer: res <- gather(students2, sex_class, count, -grade)
+  AnswerTests: match_call('res <- gather(students2, sex_class, count, -grade)')
   Hint: "Call gather() with the following arguments (in order): students2, sex_class, count, -grade). Store the result in a variable called res."
 
 - Class: cmd_question
@@ -92,7 +92,7 @@
   Hint: Type ?separate to pull up the help file.
 
 - Class: cmd_question
-  Output: Call separate() on res to split the sex_class column into sex and class. You only need to specify the first three arguments: data = res, col = sex_class, into = c("sex", "class"). You don't have to provide the argument names as long as they are in the correct order.
+  Output: 'Call separate() on res to split the sex_class column into sex and class. You only need to specify the first three arguments: data = res, col = sex_class, into = c("sex", "class"). You don''t have to provide the argument names as long as they are in the correct order.'
   CorrectAnswer: separate(res, sex_class, c("sex", "class"))
   AnswerTests: match_call('separate(res, sex_class, c("sex", "class"))')
   Hint: separate(res, sex_class, c("sex", "class")) will split the sex_class column into sex and class.
@@ -109,7 +109,11 @@
   Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
   Script: script1.R
 
-
+- Class: cmd_question
+  Output: A third symptom of messy data we'll look at is when variables are stored in both rows and columns. students3 provides an example of this. Print students3 to the console.
+  CorrectAnswer: students3
+  AnswerTests: prints_var('students3')
+  Hint: Type students 3 to view its contents.
 
 
 

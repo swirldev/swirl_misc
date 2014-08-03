@@ -19,12 +19,40 @@ gather(students, sex, count, -grade)
 
 # variables are stored in both rows and columns
 
+students3 %>%
+  gather(class, grade, class1:class5, na.rm = TRUE)
+
+res2 <- students3 %>%
+  gather(class, grade, class1:class5, na.rm = TRUE) %>%
+  mutate(class = extract_numeric(class)) %>%
+  select(name, class, test, grade) %>%
+  arrange(name, class)
+
+res2 %>% spread(test, grade)
+
 
 # multiple types of observational units are stored in the same table
 
+students4
+
+student_info <- students4 %>%
+  select(id, name, sex) %>%
+  unique()
+student_info
+
+gradebook <- students4 %>%
+  select(id, class, midterm, final)
+gradebook
 
 # a single observational unit is stored in multiple tables
 
+passed <- passed %>%
+  mutate(status = "passed")
+failed <- failed %>%
+  mutate(status = "failed")
+
+rbind_list(passed, failed) %>%
+  arrange(desc(status), name, class)
 
 # real data examples
 
