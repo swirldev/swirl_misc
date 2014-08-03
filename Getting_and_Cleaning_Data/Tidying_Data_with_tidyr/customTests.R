@@ -52,3 +52,34 @@ prints_var <- function(varname) {
   e <- get("e", parent.frame())
   any_of_exprs(varname, paste0('print(', varname, ')'))
 }
+
+# Check that the output/value produced by a script is correct
+script_vals_identical <- function() {
+  # Get e
+  e <- get('e', parent.frame())
+  # Get value produced from user's script
+  user_val <- capture.output(
+    local(
+      try(
+        # Must use eval-parse combo, not source, if we don't force user
+        # to print result
+        eval(e$expr),
+        silent = TRUE
+      )
+    )
+  )
+  # Get value produced from correct script
+  correct_val <- capture.output(
+    local(
+      try(
+        # Must use eval-parse combo, not source, if we don't force user
+        # to print result
+        eval(parse(file = e$correct_script_temp_path)),
+        silent = TRUE
+      )
+    )
+  )
+  # Compare values
+  identical(user_val, correct_val)
+}
+

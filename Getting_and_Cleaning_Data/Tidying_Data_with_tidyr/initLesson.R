@@ -1,36 +1,36 @@
 # number of letter grades (A - E)
-ng <- 5
+.ng <- 5
 # max number of students/group
-gmax <- 8
+.gmax <- 8
 
 # column headers are values, not variable names
 
 set.seed(1234)
 students <- data.frame(
-  grade = LETTERS[1:ng],
-  male = sample(0:gmax, ng, replace = TRUE),
-  female = sample(0:gmax, ng, replace = TRUE)
+  grade = LETTERS[1:.ng],
+  male = sample(0:.gmax, .ng, replace = TRUE),
+  female = sample(0:.gmax, .ng, replace = TRUE)
 )
 
 # multiple variables are stored in one column
 
 set.seed(1211)
 students2 <- data.frame(
-  grade = LETTERS[1:ng],
-  male_1 = sample(0:gmax, ng, replace = TRUE),
-  female_1 = sample(0:gmax, ng, replace = TRUE),
-  male_2 = sample(0:gmax, ng, replace = TRUE),
-  female_2 = sample(0:gmax, ng, replace = TRUE)
+  grade = LETTERS[1:.ng],
+  male_1 = sample(0:.gmax, .ng, replace = TRUE),
+  female_1 = sample(0:.gmax, .ng, replace = TRUE),
+  male_2 = sample(0:.gmax, .ng, replace = TRUE),
+  female_2 = sample(0:.gmax, .ng, replace = TRUE)
 )
 
 # variables are stored in both rows and columns
 
 set.seed(67)
 students3 <- data.frame(
-  grade = rep(LETTERS[1:ng], each = 2),
-  pm = rep(c("+", "-"), ng),
-  male = sample(0:gmax, ng * 2, replace = TRUE),
-  female = sample(0:gmax, ng * 2, replace = TRUE)
+  grade = rep(LETTERS[1:.ng], each = 2),
+  pm = rep(c("+", "-"), .ng),
+  male = sample(0:.gmax, .ng * 2, replace = TRUE),
+  female = sample(0:.gmax, .ng * 2, replace = TRUE)
 )
 
 # multiple types of observational units are stored in the same table
@@ -41,7 +41,7 @@ students4 <- data.frame(
   name = rep(c("Sally", "Jeff", "Roger", "Karen", "Brian"), each = 2),
   sex = rep(c("F", "M", "M", "F", "M"), each = 2),
   class = rep(c(1, 2), 5),
-  grade = sample(LETTERS[1:ng], 10, replace = TRUE)
+  grade = sample(LETTERS[1:.ng], 10, replace = TRUE)
 )
 
 # a single observational unit is stored in multiple tables
