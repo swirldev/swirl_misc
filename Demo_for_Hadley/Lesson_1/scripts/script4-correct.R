@@ -6,7 +6,7 @@
 # 3. Use layer_smooths() to add a smoothing line
 
 both %>%
-  ggvis(x = ###, y = ###) %>%
-  ### %>%
-  ### %>%
+  ggvis(x = ~temp, y = ~delay) %>%
+  layer_points() %>%
+  layer_smooths() %>%
   print # Keep the print statement to see the result

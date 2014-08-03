@@ -36,7 +36,11 @@
   Hint: Read the directions in the script carefully. If R gave you an error, try to understand what it is telling you. Remember that if you get stuck, you can type reset() to start over.
   Script: script2.R
 
-
+- Class: script
+  Output: Now, we're going to join the datasets. Complete the script, and type submit() when you're ready.
+  AnswerTests: script_results_identical('daily_weather')
+  Hint: Read the directions in the script carefully. If R gave you an error, try to understand what it is telling you. Remember that if you get stuck, you can type reset() to start over.
+  Script: script3.R
 
 
 
