@@ -187,5 +187,30 @@
 - Class: text
   Output: It's important to note that we left the id column in both tables. In the world of relational databases, 'id' is called our 'primary key' since it allows us to connect each student listed in student_info with their grades listed in gradebook. Without a unique identifier, we might not know how the tables are related. (In this case, we could have also used the name variable, since each student happens to have a unique name.)
 
+- Class: text
+  Output: The fifth and final messy data scenario that we'll address is when a single observational unit is stored in multiple tables. It's the opposite of the fourth problem.
 
+- Class: cmd_question
+  Output: To illustrate this, we've created two datasets, passed and failed. Take a look at passed now.
+  CorrectAnswer: passed
+  AnswerTests: prints_var('passed')
+  Hint: Type passed to view its contents.
+
+- Class: cmd_question
+  Output: Now view the contents of failed.
+  CorrectAnswer: failed
+  AnswerTests: prints_var('failed')
+  Hint: Type failed to view its contents.
+
+- Class: text
+  Output: Teachers decided to only take into consideration final exam grades in determining whether students passed or failed each class. As you may have inferred from the data, students passed a class if they received a final exam grade of A or B and failed otherwise.
+
+- Class: text
+  Output: The name of each dataset actually represents the value of a new variable that we will call 'status'. Before joining the two tables together, we'll add a new column to each containing this information so that its not lost when we put everything together.
+
+- Class: cmd_question
+  Output: Use dplyr's mutate() to add a new column to the passed table. The column should be called status and the value should be the same for all students, "passed" (a character string). "Overwrite" the current version of passed with the new one.
+  CorrectAnswer: passed <- passed %>% mutate(status = "passed")
+  AnswerTests: omnitest('passed <- passed %>% mutate(status = "passed")')
+  Hint: passed <- passed %>% mutate(status = "passed") will do the trick.
 

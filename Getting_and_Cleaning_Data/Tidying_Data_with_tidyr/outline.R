@@ -81,4 +81,14 @@ arrange(sat1, desc(count))
 sat %>%
   gather("column", "count", -score_range) %>%
   separate(column, c("part", "sex"))
+	
+	
+sat %>%
+  select(-contains("total")) %>%
+  gather(column, count, -score_range) %>%
+  separate(column, c("part", "sex")) %>%
+  group_by(part, sex) %>%
+  mutate(total = sum(count),
+         prop = count / total
+  )
 
