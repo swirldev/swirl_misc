@@ -22,13 +22,17 @@ gather(students, sex, count, -grade)
 students3 %>%
   gather(class, grade, class1:class5, na.rm = TRUE)
 
-res2 <- students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE) %>%
-  mutate(class = extract_numeric(class)) %>%
-  select(name, class, test, grade) %>%
-  arrange(name, class)
+# res2 <- students3 %>%
+#   gather(class, grade, class1:class5, na.rm = TRUE) %>%
+#   mutate(class = extract_numeric(class)) %>%
+#   select(name, class, test, grade) %>%
+#   arrange(name, class)
 
-res2 %>% spread(test, grade)
+# res2 %>% spread(test, grade)
+
+students3 %>%
+  gather(class, grade, class1:class5, na.rm = TRUE) %>%
+  spread(test, grade)
 
 
 # multiple types of observational units are stored in the same table

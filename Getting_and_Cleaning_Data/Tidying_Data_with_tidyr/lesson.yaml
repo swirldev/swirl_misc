@@ -29,7 +29,7 @@
   Hint: Scroll up to review the three characteristics of tidy data. Any dataset that violates at least one of these is considered messy. Therefore, all of the following are characteristics of messy data, EXCEPT...
 
 - Class: text
-  Output: The previous question gives the most common symptoms of messy data. Let's work through a simple example of each of these five cases, then tidy some real data.
+  Output: The incorrect answers to the previous question are the most common symptoms of messy data. Let's work through a simple example of each of these five cases, then tidy some real data.
 
 - Class: cmd_question
   Output: The first problem is when you have column headers that are values, not variable names. I've created a simple dataset called 'students' that demonstrates this scenario. Type students to take a look.
@@ -46,7 +46,7 @@
 - Class: cmd_question
   Output: To tidy the students data, we need to have one column for each of these three variables. We'll use the gather() function from tidyr to accomplish this. Pull up the documentation for this function with ?gather.
   CorrectAnswer: ?gather
-  AnswerTests: any_of_exprs('?gather', 'help(gather)')
+  AnswerTests: gets_help('gather')
   Hint: Use ?gather to pull up the documentation.
 
 - Class: cmd_question
@@ -70,7 +70,7 @@
 - Class: text
   Output: This dataset is similar to the first, except now there are two separate classes, 1 and 2, and we have total counts for each sex within each class. students2 suffers from the same messy data problem of having column headers that are values (male_1, female_1, etc.) and not variable names (sex, class, and count).
 
-- Class: cmd_question
+- Class: text
   Output: However, it also has multiple variables stored in each column (sex and class), which is another common symptom of messy data. Tidying this dataset will be a two step process.
 
 - Class: cmd_question
@@ -86,9 +86,9 @@
   Hint: Type res to view its contents.
 
 - Class: cmd_question
-  Output: That got us half way to tidy data, but we still have two different variables, sex and class, stored together in the sex_class column. tidyr offers a convenient separate() function for the purpose of separating one column into multiple columns. Pull up the help file for separate now.
+  Output: That got us half way to tidy data, but we still have two different variables, sex and class, stored together in the sex_class column. tidyr offers a convenient separate() function for the purpose of separating one column into multiple columns. Pull up the help file for separate() now.
   CorrectAnswer: ?separate
-  AnswerTests: any_of_exprs('?separate', 'help(separate)')
+  AnswerTests: gets_help('separate')
   Hint: Type ?separate to pull up the help file.
 
 - Class: cmd_question
@@ -98,7 +98,7 @@
   Hint: separate(res, sex_class, c("sex", "class")) will split the sex_class column into sex and class.
 
 - Class: text
-  Output: Conveniently, separate() was able to figure out on its own how to separate the sex_class column. Unless you request otherwise with the 'sep' argument, it splits on non-alphanumeric values. In other words, it assumes that the values are separated by something other than a letter or number (in this case, an underscore.
+  Output: Conveniently, separate() was able to figure out on its own how to separate the sex_class column. Unless you request otherwise with the 'sep' argument, it splits on non-alphanumeric values. In other words, it assumes that the values are separated by something other than a letter or number (in this case, an underscore.)
 
 - Class: text
   Output: Tidying students2 required both gather() and separate(), causing us to save an intermediate result (res). However, just like dplyr, you can use the %>% operator to chain multiple function calls together.
@@ -110,23 +110,32 @@
   Script: script1.R
 
 - Class: cmd_question
-  Output: A third symptom of messy data we'll look at is when variables are stored in both rows and columns. students3 provides an example of this. Print students3 to the console.
+  Output: A third symptom of messy data is when variables are stored in both rows and columns. students3 provides an example of this. Print students3 to the console.
   CorrectAnswer: students3
   AnswerTests: prints_var('students3')
   Hint: Type students 3 to view its contents.
 
+- Class: text
+  Output: In students3, we have midterm and final exam grades for five students, each of whom were enrolled in exactly two of five possible classes.
 
+- Class: text
+  Output: The first variable, name, is already a column and should remain as it is. The headers of the last five columns, class1 through class5, are all different values of what should be a class variable. The values in the test column, midterm and final, should each be its own variable containing the respective grades for each student.
 
+- Class: script
+  Output: This will require multiple steps, which we will build up gradually using %>%. Edit the R script and type submit() when you are ready. Type reset() to reset the script to its original state.
+  AnswerTests: script_vals_identical()
+  Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
+  Script: script2.R
 
+- Class: cmd_question
+  Output: The next step will require the use of spread(). Pull up the documentation for spread() now.
+  CorrectAnswer: ?spread
+  AnswerTests: gets_help('spread')
+  Hint: Type ?spread to pull up the documentation.
 
-
-
-
-
-
-
-
-
-
-
+- Class: script
+  Output: Edit the R script and type submit() when you are ready. Type reset() to reset the script to its original state.
+  AnswerTests: script_vals_identical()
+  Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
+  Script: script3.R
 

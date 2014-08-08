@@ -53,6 +53,12 @@ prints_var <- function(varname) {
   any_of_exprs(varname, paste0('print(', varname, ')'))
 }
 
+gets_help <- function(funcname) {
+  e <- get("e", parent.frame())
+  any_of_exprs(paste0('?', funcname),
+               paste0('help(', funcname, ')'))
+}
+
 # Check that the output/value produced by a script is correct
 script_vals_identical <- function() {
   # Get e
