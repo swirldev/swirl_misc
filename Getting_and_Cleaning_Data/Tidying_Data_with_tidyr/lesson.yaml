@@ -173,13 +173,13 @@
   Script: script5.R
 
 - Class: script
-  Output: Notice anything strange about student_info? It contains five duplicate rows! See the script for directions on how to fix this.
+  Output: Notice anything strange about student_info? It contains five duplicate rows! See the script for directions on how to fix this. Type submit() when you are ready, or type reset() to reset the script to its original state.
   AnswerTests: script_vals_identical()
   Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
   Script: script6.R
 
 - Class: script
-  Output: Now, using the script I just opened for you, create a second table called gradebook using the id, class, midterm, and final columns (in that order).
+  Output: "Now, using the script I just opened for you, create a second table called gradebook using the id, class, midterm, and final columns (in that order).\n\nEdit the R script and type submit() when you are ready. Type reset() to reset the script to its original state."
   AnswerTests: script_vals_identical()
   Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
   Script: script7.R
@@ -209,8 +209,50 @@
   Output: The name of each dataset actually represents the value of a new variable that we will call 'status'. Before joining the two tables together, we'll add a new column to each containing this information so that its not lost when we put everything together.
 
 - Class: cmd_question
-  Output: Use dplyr's mutate() to add a new column to the passed table. The column should be called status and the value should be the same for all students, "passed" (a character string). "Overwrite" the current version of passed with the new one.
+  Output: Use dplyr's mutate() to add a new column to the passed table. The column should be called status and the value, "passed" (a character string), should be the same for all students. 'Overwrite' the current version of passed with the new one.
   CorrectAnswer: passed <- passed %>% mutate(status = "passed")
-  AnswerTests: omnitest('passed <- passed %>% mutate(status = "passed")')
+  AnswerTests: any_of_exprs('passed <- passed %>% mutate(status = "passed")', 'passed <- mutate(passed, status = "passed")')
   Hint: passed <- passed %>% mutate(status = "passed") will do the trick.
+
+- Class: cmd_question
+  Output: Now, do the same for the failed table, except the status column should have the value "failed" for all students.
+  CorrectAnswer: failed <- failed %>% mutate(status = "failed")
+  AnswerTests: any_of_exprs('failed <- failed %>% mutate(status = "failed")', 'failed <- mutate(failed, status = "failed")')
+  Hint: failed <- failed %>% mutate(status = "failed") is what you're looking for.
+
+- Class: cmd_question
+  Output: Now, pass as arguments the passed and failed tables (in order) to the dplyr function rbind_list() (for 'row bind'), which will join them together into a single unit. Check ?rbind_list if you need help.
+  CorrectAnswer: rbind_list(passed, failed)
+  AnswerTests: match_call('rbind_list(passed, failed)')
+  Hint: Call rbind_list() with two arguments, passed and failed (in that order), to join the two tables.
+
+- Class: text
+  Output: Of course, we could arrange the rows however we wish at this point, but the important thing is that each row is an observation, each column is a variable, and the table contains a single observational unit. Thus, the data are tidy.
+
+- Class: text
+  Output: We've covered a lot in this lesson. Let's bring everything together and tidy a real dataset.
+
+- Class: text
+  Output: "The SAT is a popular college-readiness exam in the United States that consists of three sections: critical reading, mathematics, and writing. Students can earn up to 800 points on each section. This dataset presents the total number of students, for each combination of exam section and sex, within each of six score ranges. It comes from the 'Total Group Report 2013', which can be found here: http://research.collegeboard.org/programs/sat/data/cb-seniors-2013"
+
+- Class: cmd_question
+  Output: I've created a variable called 'sat' in your workspace, which contains data on all college-bound seniors who took the SAT exam in 2013. Print the dataset now.
+  CorrectAnswer: sat
+  AnswerTests: prints_var('sat')
+  Hint: Type sat to view its contents.
+
+- Class: script
+  Output: As we've done before, we'll build up a series of chained commands, using functions from both tidyr and dplyr. Edit the R script and type submit() when you are ready. Type reset() to reset the script to its original state.
+  AnswerTests: script_vals_identical()
+  Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
+  Script: script8.R
+
+- Class: script
+  Output: Finish of the job by following the directions in the script. Type submit() when you are ready, or type reset() to reset the script to its original state.
+  AnswerTests: script_vals_identical()
+  Hint: Read the directions in the script carefully. If R is giving you an error, try to understand what it is telling you. Type submit() at the prompt when you are ready, or type reset() to reset the script to its original state.
+  Script: script9.R
+
+- Class: text
+  Output: In this lesson, you learned how to tidy data with tidyr and dplyr. These tools will help you spend less time and energy getting your data ready to analyze and more time actually analyzing it.
 
