@@ -7,7 +7,7 @@
   Version: 2.2.12
 
 - Class: text
-  Output: In this lesson, you'll learn how to manipulate data using dplyr. dplyr is a fast and powerful R package written by Hadley Wickham and Romain Francois that provides a consistent and concise grammer for manipulating tabular data. 
+  Output: In this lesson, you'll learn how to manipulate data using dplyr. dplyr is a fast and powerful R package written by Hadley Wickham and Romain Francois that provides a consistent and concise grammer for manipulating tabular data.
 
 - Class: text
   Output: One unique aspect of dplyr is that the same set of tools allow you to work with tabular data from a variety of sources, including data frames, data tables, databases and multidimensional arrays. In this lesson, we'll focus on data frames, but everything you learn will apply equally to other formats.
@@ -171,11 +171,11 @@
 - Class: cmd_question
   Output: 'Now, use filter() to fetch all rows for which size is strictly greater than (>) 100500 (no quotes, since size is numeric) AND r_os equals "linux-gnu". Hint: You are passing three arguments to filter(): the name of the dataset, the first condition, and the second condition.'
   CorrectAnswer: filter(cran, size > 100500, r_os == "linux-gnu")
-  AnswerTests: any_of_exprs('filter(cran, size > 100500, r_os == "linux-gnu")', 'filter(cran, r_os == "linux-gnu"), size > 100500')
+  AnswerTests: any_of_exprs('filter(cran, size > 100500, r_os == "linux-gnu")', 'filter(cran, r_os == "linux-gnu", size > 100500')
   Hint: This is a tricky one. filter(cran, size > 100500, r_os == "linux-gnu") will give us all rows for which size is strictly greater than 100500 and r_os is "linux-gnu".
 
 - Class: text
-  Output: Finally, we want to get only the rows for which the r_version is not missing. R represents missing values with NA and these missing values can be detected using the is.na() function. 
+  Output: Finally, we want to get only the rows for which the r_version is not missing. R represents missing values with NA and these missing values can be detected using the is.na() function.
 
 - Class: cmd_question
   Output: To see how this works, try is.na(c(3, 5, NA, 10)).
@@ -185,7 +185,7 @@
 
 - Class: cmd_question
   Output: 'Now, put an exclamation point (!) before is.na() to change all of the TRUEs to FALSEs and all of the FALSEs to TRUEs, thus telling us what is NOT NA: !is.na(c(3, 5, NA, 10)).'
-  CorrectAnswer: !is.na(c(3, 5, NA, 10))
+  CorrectAnswer: "!is.na(c(3, 5, NA, 10))"
   AnswerTests: omnitest('!is.na(c(3, 5, NA, 10))')
   Hint: !is.na(c(3, 5, NA, 10)) will negate the previous command, thus telling us what is NOT NA.
 
