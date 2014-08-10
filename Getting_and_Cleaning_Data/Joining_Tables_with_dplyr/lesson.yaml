@@ -1,0 +1,13 @@
+- Class: meta
+  Course: Getting and Cleaning Data
+  Lesson: Joining Tables with dplyr
+  Author: Nick Carchedi
+  Type: Coursera
+  Organization: JHU Biostat
+  Version: 2.2.15
+
+- Class: text
+  Output: "In previous lessons, you learned about the dplyr 'verbs' (i.e. functions) that work on a single table: select(), mutate(), arrange(), summarize(), filter(), and group_by()."
+
+- Class: text
+  Output: "dplyr also provides a set of four verbs that work on two tables at a time: inner_join(), left_join(), semi_join(), and anti_join(). These verbs come from the world of SQL, which is a language for working with relational databases. Each of them takes as arguments two separate tables and joins them according to a different set of rules."
