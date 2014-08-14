@@ -7,10 +7,9 @@ yhat_test <- function() {
 
 yhat_test2 <- function() {
   e <- get("e", parent.frame())
-  sub <- data.frame(expr = deparse(e$expr), val = e$val,
-                    stringsAsFactors = FALSE)
-  res <- model.predict(sub) # For testing purposes only
-  # res <- yhat.predict("auto_grader3", sub, silent = TRUE)
+  sub <- data.frame(expr = deparse(e$expr), stringsAsFactors = FALSE)
+  # res <- model.predict(sub) # For testing purposes only
+  res <- yhat.predict("auto_grader3", sub, silent = TRUE)
   if(!is.na(res$mes)) swirl:::swirl_out(res$mes)
   res$is_correct
 }
@@ -41,16 +40,18 @@ yhat_test2 <- function() {
 ## Code used to deploy yhat auto_grader3 ##
 ###########################################
 
-# library(yhatr)
-#
-# model.transform <- function(df) {
-#   df
-# }
+library(yhatr)
+
+model.transform <- function(df) {
+  df
+}
 
 model.predict <- function(df) {
   # Get expr and val
   expr <- parse(text = df$expr)[[1]]
-  val <- df$val
+  tempenv <- new.env()
+  val <- try(eval(expr, tempenv), silent = TRUE)
+
   # Check if vector is numeric
   if(!is.numeric(val)) {
     res <- data.frame(is_correct = FALSE,
@@ -65,9 +66,7 @@ model.predict <- function(df) {
     )
     return(res)
   }
-  # Check if expr creates a new variable called x
-  tempenv <- new.env()
-  try(eval(expr, tempenv), silent = TRUE)
+  # Check if variable called x is created
   if(!("x" %in% ls(tempenv))) {
     res <- data.frame(is_correct = FALSE,
                       mes = "You didn't create a new variable called x!"
@@ -78,9 +77,9 @@ model.predict <- function(df) {
   data.frame(is_correct = TRUE, mes = NA)
 }
 
-# yhat.config <- c(username = "nick.carchedi@gmail.com",
-#                  apikey = "b31055ba97c67d31b779cddf7fdfacad",
-#                  env = "http://sandbox.yhathq.com")
-#
-# yhat.deploy("auto_grader3")
+yhat.config <- c(username = "nick.carchedi@gmail.com",
+                 apikey = "b31055ba97c67d31b779cddf7fdfacad",
+                 env = "http://sandbox.yhathq.com")
+
+yhat.deploy("auto_grader3")
 
