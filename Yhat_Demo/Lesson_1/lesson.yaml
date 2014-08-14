@@ -16,5 +16,11 @@
   AnswerTests: yhat_test()
   Hint: Think back to your childhood!
 
+- Class: cmd_question
+  Output: Store a vector containing any three numbers in a new variable called x.
+  CorrectAnswer: NULL
+  AnswerTests: yhat_test2()
+  Hint: If you get stuck, check out ?c.
+
 - Class: text
   Output: Congratulations! You've completed the Yhat autograding demo!
