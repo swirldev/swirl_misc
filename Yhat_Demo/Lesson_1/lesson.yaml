@@ -1,0 +1,20 @@
+- Class: meta
+  Course: Lesson 1
+  Lesson: Yhat Demo
+  Author: Nick Carchedi
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.15
+
+- Class: text
+  Output: Welcome to the Yhat autograding demo!
+
+- Class: mult_question
+  Output: Which super hero dresses in all black?
+  AnswerChoices: Batman; Superman; Green Goblin; Brian Caffo; Wolverine
+  CorrectAnswer: NULL
+  AnswerTests: yhat_test()
+  Hint: Think back to your childhood!
+
+- Class: text
+  Output: Congratulations! You've completed the Yhat autograding demo!
