@@ -24,4 +24,8 @@
   AnswerTests: gets_help('join')
   Hint: library(dplyr) will (re)load the package.
 
+- Class: text
+  Output: To illustrate how these join functions work, we'll use data from the nasaweather package. This package was automatically loaded for you at the beginning of this lesson.
+
+
 
