@@ -24,7 +24,7 @@
 - Class: cmd_question
   Output: I've made the dataset available to you in a data frame called mydf. Put it in a 'data frame tbl' using the tbl_df() function and store the result in a variable called cran. If you're not sure what I'm talking about, you should start with the previous lesson. Otherwise, practice makes perfect!
   CorrectAnswer: cran <- tbl_df(mydf)
-  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)'); expr_creates_var('cran')
+  AnswerTests: omnitest(correctExpr='cran <- tbl_df(mydf)')
   Hint: Type cran <- tbl_df(mydf) to store the data in a new tbl_df called cran.
 
 - Class: cmd_question
@@ -48,7 +48,7 @@
 - Class: cmd_question
   Output: Group cran by the package variable and store the result in a new variable called by_package.
   CorrectAnswer: by_package <- group_by(cran, package)
-  AnswerTests: omnitest('by_package <- group_by(cran, package)'); expr_creates_var('by_package')
+  AnswerTests: omnitest('by_package <- group_by(cran, package)')
   Hint: Store the result of group_by(cran, package) in a new variable called by_package.
 
 - Class: cmd_question
@@ -73,7 +73,7 @@
   Output: Instead of returning a single value, summarize() now returns the mean size for EACH package in our dataset.
 
 - Class: script
-  Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nYou may want to pull up the help files for n() and n_distinct()."
+  Output: "Let's take it a step further. I just opened an R script for you that contains a partially constructed call to summarize(). Follow the instructions in the script comments.\n\nWhen you are ready to move on, type submit(), or type reset() to reset the script to its original state."
   AnswerTests: script_results_identical('pack_sum'); multi_expr_creates_var('pack_sum')
   Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: summarize1.R
@@ -127,13 +127,13 @@
   Hint: arrange(top_counts, desc(count)) will arrange the rows of top_counts based on the values of the 'count' variable, in descending order.
 
 - Class: text
-  Output: If we use total number of downloads as our metric for popularity, then the above output shows us the top 10 most popular packages downloaded from the RStudio CRAN mirror on July 8, 2014. Not surprisingly, ggplot2 leads the pack with 4602 downloads, followed by Rcpp, plyr, rJava, ....
+  Output: If we use total number of downloads as our metric for popularity, then the above output shows us the most popular packages downloaded from the RStudio CRAN mirror on July 8, 2014. Not surprisingly, ggplot2 leads the pack with 4602 downloads, followed by Rcpp, plyr, rJava, ....
 
 - Class: text
   Output: ...And if you keep on going, you'll see swirl at number 43, with 820 total downloads. Sweet!
 
 - Class: text
-  Output: Perhaps we're more interested in the number of unique downloads on this particular day. In other words, if a package is downloaded ten times in one day from the same computer, we may wish to count that as only one download. That's what the 'unique' column will tell us.
+  Output: Perhaps we're more interested in the number of *unique* downloads on this particular day. In other words, if a package is downloaded ten times in one day from the same computer, we may wish to count that as only one download. That's what the 'unique' column will tell us.
 
 - Class: cmd_question
   Output: Like we did with 'count', let's find the 0.99, or 99%, quantile for the 'unique' variable with quantile(pack_sum$unique, probs = 0.99).
@@ -163,10 +163,10 @@
   Output: Now Rcpp is in the lead, followed by stringr, digest, plyr, and ggplot2. swirl moved up a few spaces to number 40, with 698 unique downloads. Nice!
 
 - Class: text
-  Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to an idea called 'chaining'.
+  Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to a method called 'chaining'.
 
 - Class: text
-  Output: Chaining is a method of stringing together multiple function calls in a way that is compact and readable, while still accomplishing the desired result. To make it more concrete, let's compute our last popularity metric from scratch, starting with our original data.
+  Output: Chaining allows you to string together multiple function calls in a way that is compact and readable, while still accomplishing the desired result. To make it more concrete, let's compute our last popularity metric from scratch, starting with our original data.
 
 - Class: script
   Output: I've opened up a script that contains code similar to what you've seen so far. Don't change anything. Just study it for a minute, make sure you understand everything that's there, then submit() when you are ready to move on.

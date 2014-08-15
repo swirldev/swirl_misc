@@ -9,9 +9,9 @@
 # 4. size
 #
 # The print() command at the end of the chain is optional,
-# but necessary if you want your results printed to the 
+# but necessary if you want your results printed to the
 # console.
-#
+
 cran %>%
   select() %>%
 	print()

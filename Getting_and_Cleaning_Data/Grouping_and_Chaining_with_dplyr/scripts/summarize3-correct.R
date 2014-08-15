@@ -1,5 +1,6 @@
 # Don't change any of the code below. Just type submit()
-# when you think you understand it.
+# when you think you understand it. If you find it
+# confusing, you're absolutely right!
 
 result2 <-
   arrange(
