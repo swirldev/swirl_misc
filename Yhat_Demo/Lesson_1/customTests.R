@@ -40,46 +40,46 @@ yhat_test2 <- function() {
 ## Code used to deploy yhat auto_grader3 ##
 ###########################################
 
-library(yhatr)
-
-model.transform <- function(df) {
-  df
-}
-
-model.predict <- function(df) {
-  # Get expr and val
-  expr <- parse(text = df$expr)[[1]]
-  tempenv <- new.env()
-  val <- try(eval(expr, tempenv), silent = TRUE)
-
-  # Check if vector is numeric
-  if(!is.numeric(val)) {
-    res <- data.frame(is_correct = FALSE,
-                      mes = "Your vector is not numeric!"
-    )
-    return(res)
-  }
-  # Check if vector is of length 3
-  if(!(length(val) == 3)) {
-    res <- data.frame(is_correct = FALSE,
-                      mes = "Your vector is not of length 3!"
-    )
-    return(res)
-  }
-  # Check if variable called x is created
-  if(!("x" %in% ls(tempenv))) {
-    res <- data.frame(is_correct = FALSE,
-                      mes = "You didn't create a new variable called x!"
-    )
-    return(res)
-  }
-  # If none of the tests above fail
-  data.frame(is_correct = TRUE, mes = NA)
-}
-
-yhat.config <- c(username = "nick.carchedi@gmail.com",
-                 apikey = "b31055ba97c67d31b779cddf7fdfacad",
-                 env = "http://sandbox.yhathq.com")
-
-yhat.deploy("auto_grader3")
+# library(yhatr)
+#
+# model.transform <- function(df) {
+#   df
+# }
+#
+# model.predict <- function(df) {
+#   # Get expr and val (make sure df$expr is not a factor)
+#   expr <- parse(text = as.character(df$expr))[[1]]
+#   tempenv <- new.env()
+#   val <- try(eval(expr, tempenv), silent = TRUE)
+#
+#   # Check if vector is numeric
+#   if(!is.numeric(val)) {
+#     res <- data.frame(is_correct = FALSE,
+#                       mes = "Your vector is not numeric!"
+#     )
+#     return(res)
+#   }
+#   # Check if vector is of length 3
+#   if(!(length(val) == 3)) {
+#     res <- data.frame(is_correct = FALSE,
+#                       mes = "Your vector is not of length 3!"
+#     )
+#     return(res)
+#   }
+#   # Check if variable called x is created
+#   if(!("x" %in% ls(tempenv))) {
+#     res <- data.frame(is_correct = FALSE,
+#                       mes = "You didn't create a new variable called x!"
+#     )
+#     return(res)
+#   }
+#   # If none of the tests above fail
+#   data.frame(is_correct = TRUE, mes = NA)
+# }
+#
+# yhat.config <- c(username = "nick.carchedi@gmail.com",
+#                  apikey = "b31055ba97c67d31b779cddf7fdfacad",
+#                  env = "http://sandbox.yhathq.com")
+#
+# yhat.deploy("auto_grader3")
 
