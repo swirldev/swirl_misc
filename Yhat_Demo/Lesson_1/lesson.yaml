@@ -9,6 +9,9 @@
 - Class: text
   Output: Welcome to the Yhat autograding demo!
 
+- Class: text
+  Output: Your answers to the following questions will be evaluated on Yhat's servers, then you'll receive feedback here just like you normally do.
+
 - Class: mult_question
   Output: Which super hero dresses in all black?
   AnswerChoices: Batman; Superman; Green Goblin; Brian Caffo; Wolverine
@@ -23,4 +26,4 @@
   Hint: If you get stuck, check out ?c.
 
 - Class: text
-  Output: Congratulations! You've completed the Yhat autograding demo!
+  Output: Congratulations! You've just witnessed the future of swirl's autograding capabilities!

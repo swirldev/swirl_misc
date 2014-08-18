@@ -10,6 +10,10 @@ yhat_test2 <- function() {
   sub <- data.frame(expr = deparse(e$expr), stringsAsFactors = FALSE)
   # res <- model.predict(sub) # For testing purposes only
   res <- yhat.predict("auto_grader3", sub, silent = TRUE)
+  # Fix classes of return object
+  res$is_correct <- as.logical(res$is_correct)
+  res$mes <- as.character(res$mes)
+  # If message exists, print it
   if(!is.na(res$mes)) swirl:::swirl_out(res$mes)
   res$is_correct
 }
@@ -82,4 +86,4 @@ yhat_test2 <- function() {
 #                  env = "http://sandbox.yhathq.com")
 #
 # yhat.deploy("auto_grader3")
-
+#
