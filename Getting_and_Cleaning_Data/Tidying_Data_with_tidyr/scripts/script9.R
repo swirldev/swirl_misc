@@ -16,4 +16,4 @@ sat %>%
   ### <Your call to group_by()> %>%
   mutate(###,
          ###
-  )
+  ) %>% print

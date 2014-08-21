@@ -14,4 +14,5 @@
 #
 students2 %>%
   gather(sex_class, count, -grade) %>%
-  separate(sex_class, c("sex", "class"))
+  separate(sex_class, c("sex", "class")) %>%
+  print

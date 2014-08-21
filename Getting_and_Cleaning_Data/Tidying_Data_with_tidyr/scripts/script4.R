@@ -12,4 +12,5 @@
 students3 %>%
   gather(class, grade, class1:class5, na.rm = TRUE) %>%
   spread(test, grade) %>%
-  ### Call to mutate() goes here
+  ### Call to mutate() goes here %>%
+  print

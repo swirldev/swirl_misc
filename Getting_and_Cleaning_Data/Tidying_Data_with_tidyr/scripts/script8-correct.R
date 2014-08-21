@@ -17,4 +17,5 @@
 sat %>%
   select(-contains("total")) %>%
   gather(part_sex, count, -score_range) %>%
-  separate(part_sex, c("part", "sex"))
+  separate(part_sex, c("part", "sex")) %>%
+  print

@@ -19,4 +19,5 @@
 # Consult ?gather and/or ?chain if you get stuck.
 #
 students3 %>%
-  gather(class, grade, class1:class5, na.rm = TRUE)
+  gather(class, grade, class1:class5, na.rm = TRUE) %>%
+  print

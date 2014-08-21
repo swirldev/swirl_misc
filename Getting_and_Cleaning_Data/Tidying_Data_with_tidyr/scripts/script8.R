@@ -17,4 +17,5 @@
 sat %>%
   select(-contains(###)) %>%
   gather(###, ###, -###) %>%
-  ### <Your call to separate()>
+  ### <Your call to separate()> %>%
+  print

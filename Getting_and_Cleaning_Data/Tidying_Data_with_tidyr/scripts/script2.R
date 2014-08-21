@@ -19,4 +19,5 @@
 # Consult ?gather and/or ?chain if you get stuck.
 #
 students3 %>%
-  gather( , , : , = TRUE)
+  gather( , , : , = TRUE) %>%
+  print

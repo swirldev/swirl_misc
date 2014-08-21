@@ -16,4 +16,4 @@ sat %>%
   group_by(part, sex) %>%
   mutate(total = sum(count),
          prop = count / total
-  )
+  ) %>% print

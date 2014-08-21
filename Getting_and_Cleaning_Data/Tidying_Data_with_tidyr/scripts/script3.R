@@ -10,4 +10,5 @@
 #
 students3 %>%
   gather(class, grade, class1:class5, na.rm = TRUE) %>%
-  spread( , )
+  spread( , ) %>%
+  print

@@ -41,7 +41,7 @@
   Hint: Type students to view the data.
 
 - Class: text
-  Output: The first column, grade, represents each of five possible grades that students could receive for a particular class. The second and third columns, give the number of male and female students, respectively, that received each grade.
+  Output: The first column represents each of five possible grades that students could receive for a particular class. The second and third columns give the number of male and female students, respectively, that received each grade.
 
 - Class: text
   Output: "This dataset actually has three variables: grade, sex, and count. The first variable, grade, is already a column, so that should remain as it is. The second variable, sex, is captured by the second and third column headings. The third variable, count, is the number of students for each combination of grade and sex."
@@ -104,7 +104,7 @@
   Output: Conveniently, separate() was able to figure out on its own how to separate the sex_class column. Unless you request otherwise with the 'sep' argument, it splits on non-alphanumeric values. In other words, it assumes that the values are separated by something other than a letter or number (in this case, an underscore.)
 
 - Class: text
-  Output: Tidying students2 required both gather() and separate(), causing us to save an intermediate result (res). However, just like dplyr, you can use the %>% operator to chain multiple function calls together.
+  Output: Tidying students2 required both gather() and separate(), causing us to save an intermediate result (res). However, just like with dplyr, you can use the %>% operator to chain multiple function calls together.
 
 - Class: script
   Output: I've opened an R script for you to give this a try. Follow the directions in the script and type submit() at the prompt when you are ready. If you get stuck and want to start over, you can type reset() to reset the script to its original state.
@@ -233,7 +233,7 @@
   Output: We've covered a lot in this lesson. Let's bring everything together and tidy a real dataset.
 
 - Class: text
-  Output: "The SAT is a popular college-readiness exam in the United States that consists of three sections: critical reading, mathematics, and writing. Students can earn up to 800 points on each section. This dataset presents the total number of students, for each combination of exam section and sex, within each of six score ranges. It comes from the 'Total Group Report 2013', which can be found here: http://research.collegeboard.org/programs/sat/data/cb-seniors-2013"
+  Output: "The SAT is a popular college-readiness exam in the United States that consists of three sections: critical reading, mathematics, and writing. Students can earn up to 800 points on each section. This dataset presents the total number of students, for each combination of exam section and sex, within each of six score ranges. It comes from the 'Total Group Report 2013', which can be found here:\n\nhttp://research.collegeboard.org/programs/sat/data/cb-seniors-2013"
 
 - Class: cmd_question
   Output: I've created a variable called 'sat' in your workspace, which contains data on all college-bound seniors who took the SAT exam in 2013. Print the dataset now.

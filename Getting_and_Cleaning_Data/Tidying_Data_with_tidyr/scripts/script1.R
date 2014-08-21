@@ -14,4 +14,5 @@
 #
 students2 %>%
   gather( , , ) %>%
-  separate( , c("", ""))
+  separate( , c("", "")) %>%
+  print
