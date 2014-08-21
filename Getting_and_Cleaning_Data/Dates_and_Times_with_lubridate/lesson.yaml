@@ -10,7 +10,7 @@
   Output: In this lesson, we'll explore the lubridate R package, by Garrett Grolemund and Hadley Wickham. According to the package authors, "lubridate has a consistent, memorable syntax, that makes working with dates fun instead of frustrating." If you've ever worked with dates in R, that statement probably has your attention.
 
 - Class: cmd_question
-  Output: lubridate should have been automatically installed (if necessary) and loaded upon starting this lesson. To build the habit, we'll go ahead and (re)load the package now. Type library(lubridate) to do so.
+  Output: lubridate was automatically installed (if necessary) and loaded upon starting this lesson. To build the habit, we'll go ahead and (re)load the package now. Type library(lubridate) to do so.
   CorrectAnswer: library(lubridate)
   AnswerTests: start_timer(); omnitest(correctExpr='library(lubridate)')
   Hint: Type library(lubridate) to (re)load the package.
@@ -174,8 +174,8 @@
 - Class: cmd_question
   Output: Unless you're a superhero, some time has passed since you first created this_moment. Use update() to make it match the current time, specifying at least hours and minutes. Assign the result to this_moment, so that this_moment will contain the new time.
   CorrectAnswer: this_moment <- update(this_moment, hours = 10, minutes = 16, seconds = 0)
-  AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes')
-  Hint: Try update(this_moment, hours = 10, minutes = 16, seconds = 0), which will update the time to 10:16:00.
+  AnswerTests: expr_uses_func('update'); func_uses_args('hours', 'minutes'); expr_creates_var('this_moment')
+  Hint: Try update(this_moment, hours = 10, minutes = 16, seconds = 0), which will update the time to 10:16:00. Make sure to reassign the result to this_moment.
 
 - Class: cmd_question
   Output: Take one more look at this_moment to see that it's been updated.
@@ -196,13 +196,13 @@
   Hint: now("America/New_York") will give the current date in New York. Store the result in a variable called nyc.
 
 - Class: text
-  Output: "For a complete list of valid time zones for use with lubridate, check out the following Wikipedia page: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
+  Output: "For a complete list of valid time zones for use with lubridate, check out the following Wikipedia page:\n\nhttp://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
 
 - Class: cmd_question
-  Output: View the contents of nyc.
+  Output: View the contents of nyc, which now contains the current date and time in New York.
   CorrectAnswer: nyc
   AnswerTests: any_of_exprs('nyc', 'print(nyc)')
-  Hint: Type nyc to see the current date in New York.
+  Hint: Type nyc to see the current date and time in New York.
 
 - Class: cmd_question
   Output: "Your flight is the day after tomorrow (in New York time), so we want to add two days to nyc. One nice aspect of lubridate is that it allows you to use arithmetic operators on dates and times. In this case, we'd like to add two days to nyc, so we can use the following expression: nyc + days(2). Give it a try, storing the result in a variable called depart."
