@@ -16,7 +16,7 @@ result2 <-
       ),
       countries > 60
     ),
-    desc(count),
+    desc(countries),
     avg_bytes
   )
 

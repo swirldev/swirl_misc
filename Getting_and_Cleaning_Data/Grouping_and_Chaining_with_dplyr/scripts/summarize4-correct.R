@@ -1,5 +1,9 @@
-# Don't change any of the code below. Just type submit()
-# when you think you understand it.
+# Read the code below, but don't change anything. As
+# you read it, you can pronounce the %>% operator as
+# the word 'then'.
+#
+# Type submit() when you think you understand
+# everything here.
 
 result3 <-
   cran %>%

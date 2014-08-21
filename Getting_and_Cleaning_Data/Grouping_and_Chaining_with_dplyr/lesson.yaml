@@ -163,7 +163,7 @@
   Output: Now Rcpp is in the lead, followed by stringr, digest, plyr, and ggplot2. swirl moved up a few spaces to number 40, with 698 unique downloads. Nice!
 
 - Class: text
-  Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to a method called 'chaining'.
+  Output: Our final metric of popularity is the number of distinct countries from which each package was downloaded. We'll approach this one a little differently to introduce you to a method called 'chaining' (or 'piping').
 
 - Class: text
   Output: Chaining allows you to string together multiple function calls in a way that is compact and readable, while still accomplishing the desired result. To make it more concrete, let's compute our last popularity metric from scratch, starting with our original data.
@@ -225,19 +225,5 @@
   Hint: Follow the directions in the script comments very carefully. If R gave you an error above, try to understand what it is telling you. If you get stuck, type reset() to start with a fresh script, then submit() when you are ready.
   Script: chain4.R
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- Class: text
+  Output: In this lesson, you learned about grouping and chaining using dplyr. You combined some of the things you learned in the previous lesson with these more advanced ideas to produce concise, readable, and highly effective code. Welcome to the wonderful world of dplyr!

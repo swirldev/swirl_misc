@@ -8,10 +8,13 @@
 # 3. package
 # 4. size
 #
-# The print() command at the end of the chain is optional,
+# The call to print() at the end of the chain is optional,
 # but necessary if you want your results printed to the
-# console.
+# console. Note that since there are no additional arguments
+# to print(), you can just leave of the parentheses after
+# the function name. This is a convenient feature of the %>%
+# operator.
 
 cran %>%
   select() %>%
-	print()
+	print
