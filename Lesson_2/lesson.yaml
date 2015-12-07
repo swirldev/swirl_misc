@@ -1,0 +1,20 @@
+- Class: meta
+  Course: swirl misc
+  Lesson: Lesson 2
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.2.21
+  
+- Class: figure
+  Output: Look at the equation below.
+  Figure: eq1.R
+  FigureType: new
+  
+- Class: figure
+  Output: Look at another equation.
+  Figure: eq2.R
+  FigureType: new
+
+- Class: text
+  Output: This concludes this lesson.

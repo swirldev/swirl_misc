@@ -1,0 +1,5 @@
+---
+output: html_document
+---
+
+An inline equantion appears between here $\int_{-\infty}^{\infty}xf(x)dx$ and here.

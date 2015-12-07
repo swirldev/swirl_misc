@@ -1,0 +1,9 @@
+---
+output: html_document
+---
+
+Expected value for a discrete rv:
+
+$$
+E[X] = \sum_{i=1}^{\infty}x_ip_i
+$$
