@@ -1,0 +1,15 @@
+- Class: meta
+  Course: Math Demo
+  Lesson: Lesson 1
+  Author: Sean Kross
+  Type: Standard
+  Organization: JHU Data Science Lab
+  Version: 2.2.21
+
+- Class: figure
+  Output: "This is a demo of showing math notation in the plotting window."
+  Figure: alpha_beta.R
+  FigureType: new
+
+- Class: text
+  Output: "This concludes this lesson."
