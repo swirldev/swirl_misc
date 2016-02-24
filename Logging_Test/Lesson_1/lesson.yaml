@@ -1,0 +1,23 @@
+- Class: meta
+  Course: Logging Test
+  Lesson: Lesson 1
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.3.1.9010
+
+- Class: text
+  Output: This is a test.
+
+- Class: cmd_question
+  Output: Enter 2 + 2.
+  CorrectAnswer: 2 + 2
+  AnswerTests: omnitest(correctExpr='2 + 2')
+  Hint: hint
+
+- Class: mult_question
+  Output: Would you like to send your log?
+  AnswerChoices: Yes;No
+  CorrectAnswer: NULL
+  AnswerTests: create_log()
+  Hint: hint
